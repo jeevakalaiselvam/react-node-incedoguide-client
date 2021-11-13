@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Page1 from './components/Page1';
 import Page2 from './components/Page2';
-// import Tourme from 'jeeva-tourme';
-import Tourme from './library/Tourme';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Tourme from 'jeeva-tourme';
+// import Tourme from './library/Tourme';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Column, Navbar, Nav } from 'react-bootstrap';
 import TOUR_ME_CONFIG from './TOURME_CONFIG.json';
 

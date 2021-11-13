@@ -10,7 +10,6 @@ export const fetchUserDetails = async ({ userId }, env) => {
   try {
     const { data } = await axios.post(url, { userId });
     const { tourmeUser } = data;
-    console.log('TOURME', tourmeUser);
     if (tourmeUser) {
       return tourmeUser;
     } else {

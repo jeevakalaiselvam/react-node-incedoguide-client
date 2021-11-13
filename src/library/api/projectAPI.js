@@ -41,7 +41,6 @@ export const fetchProjectDetails = async ({ projectName, userId }, env) => {
     });
     const { project } = data;
     if (project) {
-      console.log(project);
       return project;
     } else {
       return null;

@@ -2,17 +2,23 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { generateMenuForRoles } from '../util/menuUtils';
 
-export default function Menu() {
+export default function Menu({ menuToggleHandler, roleList }) {
+  const menuItems = generateMenuForRoles(roleList);
+
   return (
-    <Dropdown>
-      <Dropdown.Toggle variant="none" id="dropdown-basic">
+    <Dropdown onToggle={(isOpen) => menuToggleHandler(isOpen)}>
+      <Dropdown.Toggle variant="none" id="tourme-menu">
         <FontAwesomeIcon icon={faQuestion} />
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        {menuItems &&
+          menuItems.map((menuItem) => (
+            <Dropdown.Item key={menuItem.action}>
+              {menuItem.title}
+            </Dropdown.Item>
+          ))}
       </Dropdown.Menu>
     </Dropdown>
   );

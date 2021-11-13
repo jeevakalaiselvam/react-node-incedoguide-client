@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
 import Menu from './ui/Menu';
 
-export default function Tourme() {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Tourme({ currentRoleForUser }) {
+  const [menuToggle, setMenuToggle] = useState(false);
 
-  const menuClickHandler = () => {
-    setMenuOpen((oldMenuState) => !oldMenuState);
+  const menuToggleHandler = (isMenuOpen) => {
+    setMenuToggle((_) => isMenuOpen);
   };
+
+  //Handle Side Effect when Menu is Toggled
+  useEffect(() => {}, [menuToggle]);
 
   return (
     <div>
-      <Menu />
+      <Menu
+        menuToggleHandler={menuToggleHandler}
+        roleList={currentRoleForUser}
+      />
     </div>
   );
 }

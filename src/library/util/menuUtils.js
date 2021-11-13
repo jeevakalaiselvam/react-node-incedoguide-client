@@ -41,3 +41,13 @@ export const generateMenuForRoles = (roleList) => {
 
   return [...new Set(menuItems)];
 };
+
+export const generateMenuForRoleType = (roleType) => {
+  let menuItems = [];
+
+  //For all Roles passed by user to Tourme, Add related Menu items
+  //If user has 'ADMIN' role, His Menu will be populated with Admin Menu Items from roleMappings
+  menuItems = [...menuItems, ...menuListForRole[roleType]];
+
+  return menuItems;
+};

@@ -2,13 +2,10 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { generateMenuForRoles } from '../util/menuUtils';
+import { generateMenuForRoleType } from '../util/menuUtils';
 
-export default function Menu({
-  menuToggleHandler,
-  roleList = ['TOURME_USER'],
-}) {
-  const menuItems = generateMenuForRoles(roleList);
+export default function Menu({ menuToggleHandler, roleType = 'TOURME_USER' }) {
+  const menuItems = generateMenuForRoleType(roleType);
 
   return (
     <Dropdown onToggle={(isOpen) => menuToggleHandler(isOpen)}>

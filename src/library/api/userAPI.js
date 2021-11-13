@@ -1,11 +1,16 @@
-import { APIVERSION, BASE_URL, REST_USER } from '../constants/urlConstants';
+import {
+  APIVERSION,
+  BASE_URL,
+  REST_FETCH_USER_INFO,
+} from '../constants/urlConstants';
 import axios from 'axios';
 
-export const fetchTourmeUserDetails = async (userId, env) => {
-  const url = `${BASE_URL[env]}/${APIVERSION}/${REST_USER}/${userId}`;
+export const fetchUserDetails = async ({ userId }, env) => {
+  const url = `${BASE_URL[env]}/${APIVERSION}/${REST_FETCH_USER_INFO}`;
   try {
-    const { data } = await axios.get(url);
+    const { data } = await axios.post(url, { userId });
     const { tourmeUser } = data;
+    console.log('TOURME', tourmeUser);
     if (tourmeUser) {
       return tourmeUser;
     } else {

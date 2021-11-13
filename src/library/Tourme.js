@@ -1,44 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { onboardProject } from './api/projectAPI';
-import { fetchTourmeUserDetails, getTourmeUserDetails } from './api/userAPI';
+import { fetchProjectDetails, onboardProject } from './api/projectAPI';
+import { fetchUserDetails } from './api/userAPI';
 import Menu from './ui/Menu';
 import { TOURME_ROLES } from './util/tourmeRoles';
 
 export default function Tourme({
   userId,
   environment = 'LOCAL',
-  apiVersion = 'v1',
   projectName,
   fullName,
   emailId,
 }) {
   const [menuToggle, setMenuToggle] = useState(false);
-  const [currentUser, setCurrentUserId] = useState({});
-  const [currentEnvironment, setCurrentEnvironment] = useState(environment);
-  const [currentUserRoles, setCurrentUserRoles] = useState(['TOURME_USER']);
+  const [userDetails, setUserDetails] = useState({});
   const [projectOnboarded, setProjectOnboarded] = useState(false);
+  const [userRoleType, setUserRoleType] = useState(TOURME_ROLES.TOURME_USER);
 
   const menuToggleHandler = (isMenuOpen) => {
-    setMenuToggle((oldMenuState) => isMenuOpen);
+    setMenuToggle((_MenuState) => isMenuOpen);
   };
 
-  //Check if User is present in TourmeUsers
+  //Load UserDetails or OnboardUser if First time
   useEffect(() => {
     const getTourmeUserDetails = async () => {
-      const userDetails = await fetchTourmeUserDetails(
-        userId,
-        currentEnvironment
-      );
+      const userDetails = await fetchUserDetails({ userId }, environment);
       //If User Details are present
       if (userDetails) {
         const { userId, emailId, fullName } = userDetails;
-        setCurrentUserId((old) => ({
+        setUserDetails((_) => ({
           userId,
           emailId,
           fullName,
         }));
-        //Set User has already onboarded Project
-        setProjectOnboarded((old) => true);
+        setProjectOnboarded((_) => true);
       } else {
         //If user is not present, Onboard the current Project
         const onboardCompleted = await onboardProject(
@@ -54,20 +48,24 @@ export default function Tourme({
 
         if (onboardCompleted) {
           //Set Onboarding is complete for current project
-          setProjectOnboarded((old) => true);
-          console.log('Project Onboarded');
+          setProjectOnboarded((_) => true);
         }
       }
+      const { roleType } = await fetchProjectDetails(
+        { userId, projectName },
+        environment
+      );
+      setUserRoleType((_) => roleType);
     };
     getTourmeUserDetails();
-  }, [userId, currentEnvironment]);
+  }, []);
 
   //Handle Side Effect when Menu is Toggled
   useEffect(() => {}, [menuToggle]);
 
   return (
     <div>
-      <Menu menuToggleHandler={menuToggleHandler} />
+      <Menu menuToggleHandler={menuToggleHandler} roleType={userRoleType} />
     </div>
   );
 }

@@ -24,16 +24,17 @@ function App() {
                       <Nav.Link href="/page2">Page2</Nav.Link>
                       <Nav.Link href="/page2">Page3</Nav.Link>
                       {/* Tourme Integration */}
-                      <Tourme
-                        userId={CONFIG.userId}
-                        environment={CONFIG.environment}
-                        projectName={CONFIG.projectName}
-                        fullName={CONFIG.fullName}
-                        emailId={CONFIG.emailId}
-                      />
+
                       {/* Tourme Integration */}
                     </Nav>
                   </Navbar.Collapse>
+                  <Tourme
+                    userId={CONFIG.userId}
+                    environment={CONFIG.environment}
+                    projectName={CONFIG.projectName}
+                    fullName={CONFIG.fullName}
+                    emailId={CONFIG.emailId}
+                  />
                 </Container>
               </Navbar>
               <Container>

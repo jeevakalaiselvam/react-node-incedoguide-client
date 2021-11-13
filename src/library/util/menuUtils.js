@@ -1,3 +1,5 @@
+import { TOURME_ROLES } from './tourmeRoles';
+
 const ALL_MENU_ITEMS = {
   TOUR_CONFIGURATION: {
     title: 'Tour Configuration',
@@ -14,12 +16,16 @@ const ALL_MENU_ITEMS = {
 };
 
 export const menuListForRole = {
-  ADMIN: [
+  [TOURME_ROLES['TOURME_ADMIN']]: [
     ALL_MENU_ITEMS['TOUR_CONFIGURATION'],
     ALL_MENU_ITEMS['TOUR_VISIBILITY'],
     ALL_MENU_ITEMS['PROVIDE_FEEDBACK'],
   ],
-  USER: [ALL_MENU_ITEMS['PROVIDE_FEEDBACK']],
+  [TOURME_ROLES['TOURME_LEAD']]: [
+    ALL_MENU_ITEMS['TOUR_VISIBILITY'],
+    ALL_MENU_ITEMS['PROVIDE_FEEDBACK'],
+  ],
+  [TOURME_ROLES['TOURME_USER']]: [ALL_MENU_ITEMS['PROVIDE_FEEDBACK']],
 };
 
 export const generateMenuForRoles = (roleList) => {

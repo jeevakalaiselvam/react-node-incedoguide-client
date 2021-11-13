@@ -4,7 +4,10 @@ import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { generateMenuForRoles } from '../util/menuUtils';
 
-export default function Menu({ menuToggleHandler, roleList }) {
+export default function Menu({
+  menuToggleHandler,
+  roleList = ['TOURME_USER'],
+}) {
   const menuItems = generateMenuForRoles(roleList);
 
   return (

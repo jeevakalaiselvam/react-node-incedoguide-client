@@ -20,7 +20,7 @@ export const handleDOMSelect = (document, startDOMSelect, dispatch) => {
       element.removeEventListener('click', mouseClickListener, true);
       element.removeEventListener('mouseenter', mouseEnterListener, true);
       element.removeEventListener('mouseleave', mouseLeaveListener, true);
-      element.style.border = 'none';
+      element.classList.remove('tourmeDomSelect');
     });
   };
 
@@ -35,14 +35,14 @@ export const handleDOMSelect = (document, startDOMSelect, dispatch) => {
     e.preventDefault();
     e.stopPropagation();
     const elementInner = e.target;
-    elementInner.style.border = '1px solid rgba(0,0,0,0.3)';
+    elementInner.classList.add('tourmeDomSelect');
   };
 
   const mouseLeaveListener = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const elementInner = e.target;
-    elementInner.style.border = 'none';
+    elementInner.classList.remove('tourmeDomSelect');
   };
 
   if (startDOMSelect) {

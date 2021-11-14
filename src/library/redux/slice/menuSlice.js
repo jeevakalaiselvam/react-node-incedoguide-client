@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ADD_NEW_TOUR_ACTIONS } from '../../util/addTourActions';
 import { CONFIGURE_TOUR_MENU_OPTIONS } from '../../util/configureTourUtils';
 
 export const menuSlice = createSlice({
@@ -37,6 +38,8 @@ export const menuSlice = createSlice({
       switch (action.payload) {
         case CONFIGURE_TOUR_MENU_OPTIONS.ADD_TOUR.action:
           state.configureTourMenu.addTour.visible = true;
+          state.configureTourMenu.addTour.currentAction =
+            ADD_NEW_TOUR_ACTIONS.SELECTING_DOM;
           state.configureTourMenu.editTour.visible = false;
           state.configureTourMenu.reorderTour.visible = false;
           state.configureTourMenu.deleteTour.visible = false;
@@ -82,6 +85,15 @@ export const menuSlice = createSlice({
     },
     setDOMItemSelected: (state, action) => {
       state.configureTourMenu.addTour.domItemSelected = action.payload;
+      state.configureTourMenu.addTour.visible = true;
+      state.configureTourMenu.addTour.currentAction =
+        ADD_NEW_TOUR_ACTIONS.EDIT_TOUR_DETAILS;
+    },
+    setAddNewTourEditActionCancel: (state, action) => {
+      state.configureTourMenu.addTour.visible = false;
+      state.configureTourMenu.addTour.currentAction =
+        ADD_NEW_TOUR_ACTIONS.SELECTING_DOM;
+      state.configureTourMenu.visible = true;
     },
   },
   extraReducers: {},
@@ -99,6 +111,7 @@ export const {
   setAddNewTourAction,
   setAddNewTourCancel,
   setDOMItemSelected,
+  setAddNewTourEditActionCancel,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

@@ -68,6 +68,10 @@ export default function ConfigureToursOptions() {
                   (configureTourMenuOption) => {
                     return (
                       <option
+                        key={
+                          CONFIGURE_TOUR_MENU_OPTIONS[configureTourMenuOption]
+                            .title
+                        }
                         style={{ cursor: 'pointer' }}
                         value={
                           CONFIGURE_TOUR_MENU_OPTIONS[configureTourMenuOption]

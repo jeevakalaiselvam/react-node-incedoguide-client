@@ -1,33 +1,74 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import userApi from '../../api/userAPI';
 
-export const fetchUserById = createAsyncThunk(
-  'users/fetchUserById',
+export const fetchUserDetails = createAsyncThunk(
+  'users/fetchUserDetails',
   async ({ userId, environment }, thunkAPI) => {
-    const response = await userApi.fetchUserById({ userId }, environment);
+    const response = await userApi.fetchUserDetails({ userId }, environment);
     return response;
   }
 );
 
+export const onboardUserAndProject = createAsyncThunk(
+  'users/onboardUserAndProject',
+  async (
+    { userId, fullName, emailId, projectName, roleType, environment },
+    thunkAPI
+  ) => {
+    const response = await userApi.onboardUserAndProject(
+      { userId, fullName, emailId, projectName, roleType, environment },
+      environment
+    );
+    return response;
+  }
+);
+
+const initialState = {
+  userDetails: {
+    user: {},
+    projects: {},
+    userOnboarded: false,
+  },
+  loading: false,
+};
 export const userSlice = createSlice({
   name: 'user',
-  initialState: { userDetails: {}, loading: false },
-  reducers: {},
+  initialState,
+  reducers: {
+    setUserRole: (state, payload) => {
+      state.userRole = payload;
+    },
+    onboardUser: (state, payload) => {
+      state.userDetails.userOnboarded = payload;
+    },
+  },
   extraReducers: {
-    [fetchUserById.pending]: (state) => {
+    [fetchUserDetails.pending]: (state) => {
       state.loading = true;
     },
-    [fetchUserById.fulfilled]: (state, { payload }) => {
-      state.userDetails = payload;
+    [fetchUserDetails.fulfilled]: (state, { payload }) => {
+      state.userDetails.user = payload.tourmeUser;
+      state.userDetails.projects = payload.projectsForUser;
       state.loading = false;
     },
-    [fetchUserById.rejected]: (state) => {
+    [fetchUserDetails.rejected]: (state) => {
+      state.loading = false;
+    },
+    [onboardUserAndProject.pending]: (state) => {
+      state.loading = true;
+    },
+    [onboardUserAndProject.fulfilled]: (state, { payload }) => {
+      state.userDetails.user = payload.tourmeUser;
+      state.userDetails.projects = payload.projectsForUser;
+      state.loading = false;
+    },
+    [onboardUserAndProject.rejected]: (state) => {
       state.loading = false;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-// export const { fetchUser } = userSlice.actions;
+export const { setUserRole } = userSlice.actions;
 
 export default userSlice.reducer;

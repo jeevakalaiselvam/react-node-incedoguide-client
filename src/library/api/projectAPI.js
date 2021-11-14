@@ -1,38 +1,16 @@
 import {
   APIVERSION,
   BASE_URL,
-  REST_FETCH_PROJECT_INFO,
-  REST_PROJECT_ONBOARD,
+  REST_FETCH_PROJECT_DETAILS,
+  REST_ONBOARD_PROJECT,
 } from '../constants/urlConstants';
 import axios from 'axios';
 
-export const onboardProject = async (
-  { userId, fullName, emailId, projectName, roleType },
+export const fetchProjectDetails = async (
+  { projectName, userId },
   environment
 ) => {
-  const onboardURL = `${BASE_URL[environment]}/${APIVERSION}/${REST_PROJECT_ONBOARD}`;
-  try {
-    const { data } = await axios.post(onboardURL, {
-      userId: userId.toUpperCase(),
-      fullName,
-      emailId,
-      projectName: projectName.toUpperCase(),
-      roleType,
-    });
-    const { user, project } = data;
-    if (user && project) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-};
-
-export const fetchProjectDetails = async ({ projectName, userId }, env) => {
-  const url = `${BASE_URL[env]}/${APIVERSION}/${REST_FETCH_PROJECT_INFO}`;
+  const url = `${BASE_URL[environment]}/${APIVERSION}/${REST_FETCH_PROJECT_DETAILS}`;
   try {
     const { data } = await axios.post(url, {
       userId,
@@ -48,3 +26,6 @@ export const fetchProjectDetails = async ({ projectName, userId }, env) => {
     console.log(error);
   }
 };
+
+const projectAPI = { fetchProjectDetails };
+export default projectAPI;

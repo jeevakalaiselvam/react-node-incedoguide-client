@@ -18,7 +18,6 @@ export default function Menu({ roleType = 'TOURME_USER' }) {
   const menuItems = generateMenuForRoleType(roleType);
 
   const { menuVisible } = useSelector((state) => {
-    console.log('STATE', state);
     return state.menu;
   });
   const dispatch = useDispatch();

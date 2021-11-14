@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserById } from './redux/slice/userSlice';
+import {
+  fetchUserDetails,
+  setUserRole,
+  onboardUserAndProject,
+} from './redux/slice/userSlice';
+import { fetchProjectDetails } from './redux/slice/projectSlice';
 import Menu from './ui/Menu';
+import { TOURME_ROLES } from './util/tourmeRoles';
 
 export default function Core({
   userId,
@@ -10,16 +16,33 @@ export default function Core({
   fullName,
   emailId,
 }) {
-  const user = useSelector((state) => state.user.userDetails);
+  const { user, projects, userOnboarded } = useSelector(
+    (state) => state.user.userDetails
+  );
+
   const dispatch = useDispatch();
 
+  //Get User Details and User Project Details for the first time when Tourme Loads
   useEffect(() => {
-    dispatch(fetchUserById({ userId, environment }));
-  }, []);
+    dispatch(fetchUserDetails({ userId, environment }));
 
-  useEffect(() => {
-    console.log('User Details Changed');
-  }, [user]);
+    if (Object.keys(user).length) {
+      console.log('USER PRESENT');
+    } else {
+      console.log('ONBOARDING USER');
+      dispatch(
+        onboardUserAndProject({
+          userId,
+          fullName,
+          emailId,
+          projectName,
+          roleType: TOURME_ROLES.TOURME_ADMIN,
+          environment,
+        })
+      );
+    }
+  }, [userId]);
 
+  //Render Menu if User is Present
   return <>{user && <Menu userId={user.userId} />}</>;
 }

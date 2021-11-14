@@ -12,6 +12,7 @@ export const menuSlice = createSlice({
       addTour: {
         visible: true,
         currentAction: '',
+        domItemSelected: '',
       },
       editTour: { visible: true, currentAction: '' },
       reorderTour: { visible: true, currentAction: '' },
@@ -76,12 +77,19 @@ export const menuSlice = createSlice({
       state.configureTourMenu.reorderTour.visible = false;
       state.configureTourMenu.deleteTour.visible = false;
     },
+    setStartingDomSelection: (state, action) => {
+      state.configureTourMenu.addTour.visible = false;
+    },
+    setDOMItemSelected: (state, action) => {
+      state.configureTourMenu.addTour.domItemSelected = action.payload;
+    },
   },
   extraReducers: {},
 });
 
 // Action creators are generated for each case reducer function
 export const {
+  setStartingDomSelection,
   setMenuVisible,
   setMenuAction,
   setConfigureTourMenuVisible,
@@ -90,6 +98,7 @@ export const {
   setConfigureTourMenuCancel,
   setAddNewTourAction,
   setAddNewTourCancel,
+  setDOMItemSelected,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

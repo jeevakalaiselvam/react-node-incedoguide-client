@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Input,
   Label,
@@ -10,9 +10,11 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { FormGroup } from 'react-bootstrap';
 import { ADD_NEW_TOUR_ACTIONS } from '../../../../util/addTourActions';
+import { handleDOMSelect } from '../../../../util/handleDOMSelect';
 import {
   setAddNewTourAction,
   setAddNewTourCancel,
+  setStartingDomSelection,
 } from '../../../../redux/slice/menuSlice';
 
 export default function AddNewTour() {
@@ -21,6 +23,15 @@ export default function AddNewTour() {
   );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (currentAction === ADD_NEW_TOUR_ACTIONS.SELECTING_DOM) {
+      dispatch(setStartingDomSelection(true));
+      if (typeof window !== undefined) {
+        handleDOMSelect(document, true, dispatch);
+      }
+    }
+  }, [currentAction]);
 
   return (
     <>
@@ -51,8 +62,6 @@ export default function AddNewTour() {
           </Button>
         </ModalFooter>
       </Modal>
-      {currentAction === ADD_NEW_TOUR_ACTIONS.SELECTING_DOM &&
-        console.log('Starting DOM Selection')}
     </>
   );
 }

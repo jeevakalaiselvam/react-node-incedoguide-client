@@ -9,7 +9,13 @@ export const menuSlice = createSlice({
     configureTourMenu: {
       visible: false,
       action: '',
-      activeSubMenu: '',
+      addTour: {
+        visible: true,
+        currentAction: '',
+      },
+      editTour: { visible: true, currentAction: '' },
+      reorderTour: { visible: true, currentAction: '' },
+      deleteTour: { visible: true, currentAction: '' },
     },
   },
   reducers: {
@@ -29,20 +35,28 @@ export const menuSlice = createSlice({
       state.configureTourMenu.visible = false;
       switch (action.payload) {
         case CONFIGURE_TOUR_MENU_OPTIONS.ADD_TOUR.action:
-          state.configureTourMenu.activeSubMenu =
-            CONFIGURE_TOUR_MENU_OPTIONS.ADD_TOUR.action;
+          state.configureTourMenu.addTour.visible = true;
+          state.configureTourMenu.editTour.visible = false;
+          state.configureTourMenu.reorderTour.visible = false;
+          state.configureTourMenu.deleteTour.visible = false;
           break;
         case CONFIGURE_TOUR_MENU_OPTIONS.EDIT_TOUR.action:
-          state.configureTourMenu.activeSubMenu =
-            CONFIGURE_TOUR_MENU_OPTIONS.EDIT_TOUR.action;
+          state.configureTourMenu.addTour.visible = false;
+          state.configureTourMenu.editTour.visible = true;
+          state.configureTourMenu.reorderTour.visible = false;
+          state.configureTourMenu.deleteTour.visible = false;
           break;
         case CONFIGURE_TOUR_MENU_OPTIONS.REORDER_TOUR.action:
-          state.configureTourMenu.activeSubMenu =
-            CONFIGURE_TOUR_MENU_OPTIONS.REORDER_TOUR.action;
+          state.configureTourMenu.addTour.visible = false;
+          state.configureTourMenu.editTour.visible = false;
+          state.configureTourMenu.reorderTour.visible = true;
+          state.configureTourMenu.deleteTour.visible = false;
           break;
         case CONFIGURE_TOUR_MENU_OPTIONS.DELETE_TOUR.action:
-          state.configureTourMenu.activeSubMenu =
-            CONFIGURE_TOUR_MENU_OPTIONS.DELETE_TOUR.action;
+          state.configureTourMenu.addTour.visible = false;
+          state.configureTourMenu.editTour.visible = false;
+          state.configureTourMenu.reorderTour.visible = false;
+          state.configureTourMenu.deleteTour.visible = true;
           break;
         default:
           break;
@@ -51,6 +65,16 @@ export const menuSlice = createSlice({
     setConfigureTourMenuCancel: (state, action) => {
       state.configureTourMenu.visible = false;
       state.visible = true;
+    },
+    setAddNewTourAction: (state, action) => {
+      state.configureTourMenu.addTour.currentAction = action.payload;
+    },
+    setAddNewTourCancel: (state, action) => {
+      state.configureTourMenu.visible = true;
+      state.configureTourMenu.addTour.visible = false;
+      state.configureTourMenu.editTour.visible = false;
+      state.configureTourMenu.reorderTour.visible = false;
+      state.configureTourMenu.deleteTour.visible = false;
     },
   },
   extraReducers: {},
@@ -64,6 +88,8 @@ export const {
   setConfigureTourMenuAction,
   setConfigureTourMenuConfirm,
   setConfigureTourMenuCancel,
+  setAddNewTourAction,
+  setAddNewTourCancel,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

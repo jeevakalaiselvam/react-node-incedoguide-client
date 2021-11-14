@@ -50,7 +50,7 @@ function App() {
                       <DropdownToggle caret nav>
                         Options
                       </DropdownToggle>
-                      <DropdownMenu right>
+                      <DropdownMenu>
                         <DropdownItem>Option 1</DropdownItem>
                         <DropdownItem>Option 2</DropdownItem>
                         <DropdownItem divider />

@@ -7,6 +7,9 @@ import Joyride from 'react-joyride';
 import { handleDOMSelect } from './util/handleDOMSelect';
 import { getTourmeUserDetails } from './effects/menuEffects';
 import ConfigureTours from './ui/ConfigureTours';
+import { ALL_MENU_ITEMS } from './util/menuUtils';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
 
 export default function Tourme({
   userId,
@@ -16,7 +19,6 @@ export default function Tourme({
   emailId,
 }) {
   //All State Information
-  const [menuToggle, setMenuToggle] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const [projectOnboarded, setProjectOnboarded] = useState(false);
   const [userRoleType, setUserRoleType] = useState(TOURME_ROLES.TOURME_USER);
@@ -25,12 +27,7 @@ export default function Tourme({
   const [makeToursVisible, setMakeToursVisible] = useState(true);
   const [startDOMSelect, setStartDOMSelect] = useState(false);
   const [specialModifierPressed, setSpecialModifierPressed] = useState(false);
-  const [configurationPanelVisibile, setConfigurationPanelVisible] =
-    useState(true);
-
-  const menuToggleHandler = (isMenuOpen) => {
-    setMenuToggle((_) => isMenuOpen);
-  };
+  const [menuVisible, setMenuVisible] = useState(false);
 
   //Load UserDetails or OnboardUser if First time
   useEffect(() => {
@@ -43,7 +40,7 @@ export default function Tourme({
   }, []);
 
   //Handle Side Effect when Menu is Toggled
-  useEffect(() => {}, [menuToggle]);
+  useEffect(() => {}, [menuVisible]);
 
   //Handle Joyride Callback
   const handleJoyrideCallback = () => {};
@@ -58,11 +55,11 @@ export default function Tourme({
   }, [startDOMSelect]);
 
   return (
-    <div>
+    <Provider store={store}>
       <Menu
-        menuToggleHandler={menuToggleHandler}
         roleType={userRoleType}
-        menuToggle={menuToggle}
+        menuVisible={menuVisible}
+        setMenuVisible={setMenuVisible}
       />
       {makeToursVisible && (
         <Joyride
@@ -81,8 +78,6 @@ export default function Tourme({
           }}
         />
       )}
-      {/* Setup all Panel Modal Visibility */}
-      {/* {configurationPanelVisibile && <ConfigureTours />} */}
-    </div>
+    </Provider>
   );
 }

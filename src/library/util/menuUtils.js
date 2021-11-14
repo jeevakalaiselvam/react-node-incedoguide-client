@@ -1,6 +1,6 @@
 import { TOURME_ROLES } from './tourmeRoles';
 
-const ALL_MENU_ITEMS = {
+export const ALL_MENU_ITEMS = {
   TOUR_CONFIGURATION: {
     title: 'Tour Configuration',
     action: 'TOUR_CONFIGURATION',

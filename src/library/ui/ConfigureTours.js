@@ -1,24 +1,40 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import './configuretours.module.css';
+import React, { useState } from 'react';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { CONFIGURE_TOUR_MODAL_OPTIONS } from '../util/modalUtils';
 
 export default function ConfigureTours() {
+  const [modalVisible, setModalVisible] = useState(true);
+  const [selectedOption, setSelectedOption] = useState(
+    CONFIGURE_TOUR_MODAL_OPTIONS.ADD_NEW_TOUR
+  );
+
   return (
-    <div style={{ backgroundColor: 'red !important', padding: '1rem' }}>
-      <Modal.Dialog dialogClassName={'tourme-modal-center'}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <p>Modal body text goes here.</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary">Close</Button>
-          <Button variant="primary">Save changes</Button>
-        </Modal.Footer>
-      </Modal.Dialog>
-    </div>
+    <Modal modalVisible>
+      <ModalHeader
+        toggle={function noRefCheck() {
+          console.log('Cross clicked!');
+        }}
+      >
+        Configure Tours
+      </ModalHeader>
+      <ModalBody>Setup your tours here!</ModalBody>
+      <ModalFooter>
+        <Button
+          color="primary"
+          onClick={function noRefCheck() {
+            setModalVisible((_) => false);
+          }}
+        >
+          Submit
+        </Button>{' '}
+        <Button
+          onClick={function noRefCheck() {
+            setModalVisible((_) => false);
+          }}
+        >
+          Cancel
+        </Button>
+      </ModalFooter>
+    </Modal>
   );
 }

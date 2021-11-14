@@ -33,7 +33,6 @@ export const onboardProject = async (
 
 export const fetchProjectDetails = async ({ projectName, userId }, env) => {
   const url = `${BASE_URL[env]}/${APIVERSION}/${REST_FETCH_PROJECT_INFO}`;
-  console.log(url);
   try {
     const { data } = await axios.post(url, {
       userId,

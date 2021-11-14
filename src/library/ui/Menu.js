@@ -1,25 +1,33 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'reactstrap';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { generateMenuForRoleType } from '../util/menuUtils';
+import {
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu,
+  UncontrolledDropdown,
+} from 'reactstrap';
 
-export default function Menu({ menuToggleHandler, roleType = 'TOURME_USER' }) {
+export default function Menu({
+  menuToggleHandler,
+  roleType = 'TOURME_USER',
+  menuToggle,
+}) {
   const menuItems = generateMenuForRoleType(roleType);
 
   return (
-    <Dropdown onToggle={(isOpen) => menuToggleHandler(isOpen)}>
-      <Dropdown.Toggle variant="none" id="tourme-menu">
+    <UncontrolledDropdown inNavbar>
+      <DropdownToggle nav>
         <FontAwesomeIcon icon={faQuestion} />
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
+      </DropdownToggle>
+      <DropdownMenu right>
         {menuItems &&
           menuItems.map((menuItem) => (
-            <Dropdown.Item key={menuItem.action}>
-              {menuItem.title}
-            </Dropdown.Item>
+            <DropdownItem key={menuItem.action}>{menuItem.title}</DropdownItem>
           ))}
-      </Dropdown.Menu>
-    </Dropdown>
+      </DropdownMenu>
+    </UncontrolledDropdown>
   );
 }

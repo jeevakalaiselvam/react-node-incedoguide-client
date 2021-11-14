@@ -4,8 +4,23 @@ import Page2 from './components/Page2';
 // import Tourme from 'jeeva-tourme';
 import Tourme from './library/Tourme';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Column, Navbar, Nav } from 'react-bootstrap';
 import CONFIG from './config';
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  Collapse,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  NavbarText,
+  Container,
+  DropdownMenu,
+  DropdownItem,
+  Row,
+} from 'reactstrap';
 
 function App() {
   return (
@@ -14,20 +29,35 @@ function App() {
         <Row>
           <Router>
             <div>
-              <Navbar bg="light" expand="lg">
-                <Container>
-                  <Navbar.Brand href="#home">TourPlay Application</Navbar.Brand>
-                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                  <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                      <Nav.Link href="/page1">Page1</Nav.Link>
-                      <Nav.Link href="/page2">Page2</Nav.Link>
-                      <Nav.Link href="/page2">Page3</Nav.Link>
-                      {/* Tourme Integration */}
-
-                      {/* Tourme Integration */}
-                    </Nav>
-                  </Navbar.Collapse>
+              <Navbar color="light" expand="md" light>
+                <NavbarBrand href="/">Tourme App</NavbarBrand>
+                <NavbarToggler onClick={function noRefCheck() {}} />
+                <Collapse navbar>
+                  <Nav className="me-auto" navbar>
+                    <NavItem>
+                      <NavLink href="/components/">Components</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink href="/page1">Page1</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink href="/page2">Page2</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink href="/page3">Page3</NavLink>
+                    </NavItem>
+                    <UncontrolledDropdown inNavbar nav>
+                      <DropdownToggle caret nav>
+                        Options
+                      </DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem>Option 1</DropdownItem>
+                        <DropdownItem>Option 2</DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem>Reset</DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  </Nav>
                   <Tourme
                     userId={CONFIG.userId}
                     environment={CONFIG.environment}
@@ -35,7 +65,7 @@ function App() {
                     fullName={CONFIG.fullName}
                     emailId={CONFIG.emailId}
                   />
-                </Container>
+                </Collapse>
               </Navbar>
               <Container>
                 <Switch>

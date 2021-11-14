@@ -6,6 +6,7 @@ import { TOURME_ROLES } from './util/tourmeRoles';
 import Joyride from 'react-joyride';
 import { handleDOMSelect } from './util/handleDOMSelect';
 import { getTourmeUserDetails } from './effects/menuEffects';
+import ConfigureTours from './ui/ConfigureTours';
 
 export default function Tourme({
   userId,
@@ -14,6 +15,7 @@ export default function Tourme({
   fullName,
   emailId,
 }) {
+  //All State Information
   const [menuToggle, setMenuToggle] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const [projectOnboarded, setProjectOnboarded] = useState(false);
@@ -23,9 +25,11 @@ export default function Tourme({
   const [makeToursVisible, setMakeToursVisible] = useState(true);
   const [startDOMSelect, setStartDOMSelect] = useState(false);
   const [specialModifierPressed, setSpecialModifierPressed] = useState(false);
+  const [configurationPanelVisibile, setConfigurationPanelVisible] =
+    useState(true);
 
   const menuToggleHandler = (isMenuOpen) => {
-    setMenuToggle((_MenuState) => isMenuOpen);
+    setMenuToggle((_) => isMenuOpen);
   };
 
   //Load UserDetails or OnboardUser if First time
@@ -46,7 +50,7 @@ export default function Tourme({
 
   const getHelpers = () => {};
 
-  //DOM Highlight
+  //Start DOM Select
   useEffect(() => {
     if (typeof window !== 'undefined') {
       handleDOMSelect(document, specialModifierPressed, startDOMSelect);
@@ -55,7 +59,11 @@ export default function Tourme({
 
   return (
     <div>
-      <Menu menuToggleHandler={menuToggleHandler} roleType={userRoleType} />
+      <Menu
+        menuToggleHandler={menuToggleHandler}
+        roleType={userRoleType}
+        menuToggle={menuToggle}
+      />
       {makeToursVisible && (
         <Joyride
           callback={handleJoyrideCallback}
@@ -73,6 +81,8 @@ export default function Tourme({
           }}
         />
       )}
+      {/* Setup all Panel Modal Visibility */}
+      {/* {configurationPanelVisibile && <ConfigureTours />} */}
     </div>
   );
 }

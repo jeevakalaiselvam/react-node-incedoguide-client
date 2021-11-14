@@ -2,7 +2,6 @@ import {
   APIVERSION,
   BASE_URL,
   REST_FETCH_PROJECT_DETAILS,
-  REST_ONBOARD_PROJECT,
 } from '../constants/urlConstants';
 import axios from 'axios';
 

@@ -12,17 +12,21 @@ export const fetchProjectDetails = createAsyncThunk(
   }
 );
 
-const initialState = { projectDetails: {}, loading: false };
+const initialState = { currentProject: {}, loading: false };
 export const projectSlice = createSlice({
-  name: 'user',
+  name: 'project',
   initialState,
-  reducers: {},
+  reducers: {
+    setProjectDetails: (state, action) => {
+      state.currentProject = action.payload;
+    },
+  },
   extraReducers: {
     [fetchProjectDetails.pending]: (state) => {
       state.loading = true;
     },
-    [fetchProjectDetails.fulfilled]: (state, { payload }) => {
-      state.projectDetails = payload;
+    [fetchProjectDetails.fulfilled]: (state, payload) => {
+      state.currentProject = payload;
       state.loading = false;
     },
     [fetchProjectDetails.rejected]: (state) => {
@@ -32,6 +36,6 @@ export const projectSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-//export const { setUserRole } = userSlice.actions;
+export const { setProjectDetails } = projectSlice.actions;
 
 export default projectSlice.reducer;

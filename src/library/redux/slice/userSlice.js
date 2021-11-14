@@ -1,22 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import userApi from '../../api/userAPI';
+import { findProjectByName } from '../../util/helperMethods';
 
 export const fetchUserDetails = createAsyncThunk(
   'users/fetchUserDetails',
-  async ({ userId, environment }, thunkAPI) => {
-    const response = await userApi.fetchUserDetails({ userId }, environment);
-    return response;
-  }
-);
-
-export const onboardUserAndProject = createAsyncThunk(
-  'users/onboardUserAndProject',
-  async (
-    { userId, fullName, emailId, projectName, roleType, environment },
-    thunkAPI
-  ) => {
-    const response = await userApi.onboardUserAndProject(
-      { userId, fullName, emailId, projectName, roleType, environment },
+  async ({ userId, emailId, fullName, projectName, environment }, thunkAPI) => {
+    const response = await userApi.fetchUserDetails(
+      {
+        userId,
+        emailId,
+        fullName,
+        projectName: projectName.toUpperCase().trim(),
+      },
       environment
     );
     return response;
@@ -24,12 +19,9 @@ export const onboardUserAndProject = createAsyncThunk(
 );
 
 const initialState = {
-  userDetails: {
-    user: {},
-    projects: {},
-    userOnboarded: false,
-  },
   loading: false,
+  currentUser: {},
+  allUserProjects: {},
 };
 export const userSlice = createSlice({
   name: 'user',
@@ -38,31 +30,19 @@ export const userSlice = createSlice({
     setUserRole: (state, payload) => {
       state.userRole = payload;
     },
-    onboardUser: (state, payload) => {
-      state.userDetails.userOnboarded = payload;
-    },
   },
   extraReducers: {
     [fetchUserDetails.pending]: (state) => {
       state.loading = true;
     },
     [fetchUserDetails.fulfilled]: (state, { payload }) => {
-      state.userDetails.user = payload.tourmeUser;
-      state.userDetails.projects = payload.projectsForUser;
+      if (payload) {
+        state.currentUser = payload.tourmeUser;
+        state.allUserProjects = payload.projectsForUser;
+      }
       state.loading = false;
     },
     [fetchUserDetails.rejected]: (state) => {
-      state.loading = false;
-    },
-    [onboardUserAndProject.pending]: (state) => {
-      state.loading = true;
-    },
-    [onboardUserAndProject.fulfilled]: (state, { payload }) => {
-      state.userDetails.user = payload.tourmeUser;
-      state.userDetails.projects = payload.projectsForUser;
-      state.loading = false;
-    },
-    [onboardUserAndProject.rejected]: (state) => {
       state.loading = false;
     },
   },

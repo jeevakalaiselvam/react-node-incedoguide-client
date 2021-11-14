@@ -5,6 +5,5 @@ export const findProjectByName = (projects, projectName) => {
       projectName.toUpperCase().trim()
     );
   });
-  console.log('CURRENT PROJECT', currentProject);
   return currentProject;
 };

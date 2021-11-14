@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setProjectDetails } from './redux/slice/projectSlice';
 import { fetchUserDetails } from './redux/slice/userSlice';
-import Menu from './ui/Menu';
+import Menu from './ui/menu/Menu';
 import { findProjectByName } from './util/helperMethods';
 
 export default function Core({
@@ -13,7 +13,7 @@ export default function Core({
   emailId,
 }) {
   const { currentUser, allUserProjects } = useSelector((state) => state.user);
-  const { roleType } = useSelector((state) => state.project);
+  const { currentProject } = useSelector((state) => state.project);
 
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ export default function Core({
   return (
     <>
       {currentUser.userId && (
-        <Menu userId={currentUser.userId} roleType={roleType} />
+        <Menu userId={currentUser.userId} roleType={currentProject.roleType} />
       )}
     </>
   );

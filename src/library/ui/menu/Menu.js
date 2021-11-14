@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { Dropdown } from 'reactstrap';
+import React from 'react';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ALL_MENU_ITEMS, generateMenuForRoleType } from '../util/menuUtils';
-import { CONFIGURE_TOUR_MODAL_OPTIONS } from '../util/modalUtils';
+import { ALL_MENU_ITEMS, generateMenuForRoleType } from '../../util/menuUtils';
+import { CONFIGURE_TOUR_MODAL_OPTIONS } from '../../util/configureTourUtils';
 import {
   DropdownToggle,
   DropdownItem,
   DropdownMenu,
   UncontrolledDropdown,
 } from 'reactstrap';
-import ConfigureTours from './ConfigureTours';
+import ConfigureTours from './configuretours/ConfigureTours';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMenuVisible } from '../redux/slice/menuSlice';
+import { setMenuAction, setMenuVisible } from '../../redux/slice/menuSlice';
 
 export default function Menu({ roleType = 'TOURME_USER' }) {
   const menuItems = generateMenuForRoleType(roleType);
 
-  const { menuVisible } = useSelector((state) => {
+  const { visible, action } = useSelector((state) => {
     return state.menu;
   });
   const dispatch = useDispatch();
 
   return (
     <>
-      <UncontrolledDropdown isOpen={menuVisible}>
+      <UncontrolledDropdown isOpen={visible}>
         <DropdownToggle
           onClick={() => {
-            dispatch(setMenuVisible(!menuVisible));
+            dispatch(setMenuVisible(!visible));
           }}
         >
           <FontAwesomeIcon icon={faQuestion} />
@@ -38,9 +37,8 @@ export default function Menu({ roleType = 'TOURME_USER' }) {
               <DropdownItem
                 key={menuItem.action}
                 onClick={() => {
-                  //setMenuItemSelected(menuItem.action);
                   setMenuVisible((_) => false);
-                  //setMenuSelected((_) => ALL_MENU_ITEMS[menuItem.action]);
+                  dispatch(setMenuAction(menuItem.action));
                 }}
               >
                 {menuItem.title}
@@ -48,10 +46,12 @@ export default function Menu({ roleType = 'TOURME_USER' }) {
             ))}
         </DropdownMenu>
       </UncontrolledDropdown>
-      {/* Setup all Panel Modal Visibility */}
-      {/* {menuItemSelected === ALL_MENU_ITEMS.TOUR_CONFIGURATION.action && (
+
+      {action === ALL_MENU_ITEMS.TOUR_CONFIGURATION.action && (
         <ConfigureTours />
-      )} */}
+      )}
+      {action === ALL_MENU_ITEMS.TOUR_VISIBILITY.action && <ConfigureTours />}
+      {action === ALL_MENU_ITEMS.PROVIDE_FEEDBACK.action && <ConfigureTours />}
     </>
   );
 }

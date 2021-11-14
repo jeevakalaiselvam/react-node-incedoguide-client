@@ -14,6 +14,7 @@ export const menuSlice = createSlice({
         visible: true,
         currentAction: '',
         domItemSelected: '',
+        steps: [],
       },
       editTour: { visible: true, currentAction: '' },
       reorderTour: { visible: true, currentAction: '' },
@@ -21,6 +22,7 @@ export const menuSlice = createSlice({
     },
   },
   reducers: {
+    //Main Menu State Machine
     setMenuVisible: (state, action) => {
       state.visible = action.payload;
     },
@@ -29,6 +31,8 @@ export const menuSlice = createSlice({
       state.visible = false;
       state.configureTourMenu.visible = true;
     },
+
+    //Configure Tour Menu State Machine
     setConfigureTourMenuVisible: (state, action) => {
       state.configureTourMenu.visible = action.payload;
     },
@@ -70,6 +74,8 @@ export const menuSlice = createSlice({
       state.configureTourMenu.visible = false;
       state.visible = true;
     },
+
+    //Add New Tour State Machine
     setAddNewTourAction: (state, action) => {
       state.configureTourMenu.addTour.currentAction = action.payload;
     },
@@ -95,6 +101,13 @@ export const menuSlice = createSlice({
         ADD_NEW_TOUR_ACTIONS.SELECTING_DOM;
       state.configureTourMenu.visible = true;
     },
+    setAddNewTourEditActionConfirm: (state, action) => {
+      state.configureTourMenu.addTour.visible = false;
+      state.configureTourMenu.addTour.steps.push({
+        ...action.payload,
+        domTarget: state.configureTourMenu.addTour.domItemSelected,
+      });
+    },
   },
   extraReducers: {},
 });
@@ -112,6 +125,7 @@ export const {
   setAddNewTourCancel,
   setDOMItemSelected,
   setAddNewTourEditActionCancel,
+  setAddNewTourEditActionConfirm,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Input,
   Label,
@@ -15,6 +15,7 @@ import {
   setAddNewTourAction,
   setAddNewTourCancel,
   setAddNewTourEditActionCancel,
+  setAddNewTourEditActionConfirm,
   setStartingDomSelection,
 } from '../../../../redux/slice/menuSlice';
 import { ADD_NEW_TOUR_ACTIONS } from '../../../../util/addTourActions';
@@ -28,6 +29,10 @@ export default function AddNewTour() {
   const [tourName, setTourName] = useState('');
   const [stepName, setStepName] = useState('');
   const [stepDescription, setStepDescription] = useState('');
+  const tourNameRef = useRef(null);
+  const stepNameRef = useRef(null);
+  const stepDescriptionRef = useRef(null);
+
   const [mediaType, setMediaType] = useState('none');
   const [mediaUrl, setMediaUrl] = useState('');
 
@@ -92,7 +97,8 @@ export default function AddNewTour() {
             <InputGroupText>Tour Name</InputGroupText>
             <Input
               onChange={(e) => {
-                setTourName((_) => e.target.value);
+                const name = e.target.value;
+                setTourName((old) => name);
               }}
               value={tourName}
             />
@@ -101,7 +107,8 @@ export default function AddNewTour() {
             <InputGroupText>Step Name</InputGroupText>
             <Input
               onChange={(e) => {
-                setStepName((_) => e.target.value);
+                const stepName = e.target.value;
+                setStepName((old) => stepName);
               }}
               value={stepName}
             />
@@ -110,7 +117,8 @@ export default function AddNewTour() {
             <InputGroupText>Step Description</InputGroupText>
             <Input
               onChange={(e) => {
-                setStepDescription((_) => e.target.value);
+                const stepDesc = e.target.value;
+                setStepDescription((old) => stepDesc);
               }}
               value={stepDescription}
             />
@@ -129,7 +137,11 @@ export default function AddNewTour() {
               color="primary"
               onClick={function noRefCheck() {
                 dispatch(
-                  setAddNewTourAction(ADD_NEW_TOUR_ACTIONS.SELECTING_DOM)
+                  setAddNewTourEditActionConfirm({
+                    tourName,
+                    stepName,
+                    stepDescription,
+                  })
                 );
               }}
             >

@@ -5,8 +5,8 @@ import {
 } from '../constants/urlConstants';
 import axios from 'axios';
 
-export const fetchUserDetails = async ({ userId }, env) => {
-  const url = `${BASE_URL[env]}/${APIVERSION}/${REST_FETCH_USER_INFO}`;
+const fetchUserById = async ({ userId }, environment = 'LOCAL') => {
+  const url = `${BASE_URL[environment]}/${APIVERSION}/${REST_FETCH_USER_INFO}`;
   try {
     const { data } = await axios.post(url, { userId });
     const { tourmeUser } = data;
@@ -19,3 +19,7 @@ export const fetchUserDetails = async ({ userId }, env) => {
     console.log(error);
   }
 };
+
+const userAPI = { fetchUserById };
+
+export default userAPI;

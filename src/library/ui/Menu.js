@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown } from 'reactstrap';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,22 +11,24 @@ import {
   UncontrolledDropdown,
 } from 'reactstrap';
 import ConfigureTours from './ConfigureTours';
+import { useSelector, useDispatch } from 'react-redux';
+import { setMenuVisible } from '../redux/slice/menuSlice';
 
-export default function Menu({
-  roleType = 'TOURME_USER',
-  menuVisible,
-  setMenuVisible,
-}) {
+export default function Menu({ roleType = 'TOURME_USER' }) {
   const menuItems = generateMenuForRoleType(roleType);
 
-  const [menuItemSelected, setMenuSelected] = useState(null);
+  const { menuVisible } = useSelector((state) => {
+    console.log('STATE', state);
+    return state.menu;
+  });
+  const dispatch = useDispatch();
 
   return (
     <>
       <UncontrolledDropdown isOpen={menuVisible}>
         <DropdownToggle
           onClick={() => {
-            setMenuVisible((_) => !menuVisible);
+            dispatch(setMenuVisible(!menuVisible));
           }}
         >
           <FontAwesomeIcon icon={faQuestion} />
@@ -39,7 +41,7 @@ export default function Menu({
                 onClick={() => {
                   //setMenuItemSelected(menuItem.action);
                   setMenuVisible((_) => false);
-                  setMenuSelected((_) => ALL_MENU_ITEMS[menuItem.action]);
+                  //setMenuSelected((_) => ALL_MENU_ITEMS[menuItem.action]);
                 }}
               >
                 {menuItem.title}
@@ -48,9 +50,9 @@ export default function Menu({
         </DropdownMenu>
       </UncontrolledDropdown>
       {/* Setup all Panel Modal Visibility */}
-      {menuItemSelected === ALL_MENU_ITEMS.TOUR_CONFIGURATION.action && (
+      {/* {menuItemSelected === ALL_MENU_ITEMS.TOUR_CONFIGURATION.action && (
         <ConfigureTours />
-      )}
+      )} */}
     </>
   );
 }

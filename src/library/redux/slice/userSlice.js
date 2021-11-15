@@ -1,45 +1,32 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import userApi from '../../api/userAPI';
-import { findProjectByName } from '../../util/helperMethods';
+import userApi from '../../api/userApi';
 
 export const fetchUserDetails = createAsyncThunk(
   'users/fetchUserDetails',
   async ({ userId, emailId, fullName, projectName, environment }, thunkAPI) => {
-    const response = await userApi.fetchUserDetails(
-      {
-        userId,
-        emailId,
-        fullName,
-        projectName: projectName.toUpperCase().trim(),
-      },
-      environment
-    );
+    const response = userApi.fetchUserDetails({
+      userId,
+      emailId,
+      fullName,
+      projectName,
+      environment,
+    });
     return response;
   }
 );
 
-const initialState = {
-  loading: false,
-  currentUser: {},
-  allUserProjects: {},
-};
+const initialState = {};
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setUserRole: (state, payload) => {
-      state.userRole = payload;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [fetchUserDetails.pending]: (state) => {
       state.loading = true;
     },
     [fetchUserDetails.fulfilled]: (state, { payload }) => {
-      if (payload) {
-        state.currentUser = payload.tourmeUser;
-        state.allUserProjects = payload.projectsForUser;
-      }
+      state.userDetails = payload.user;
+      state.projectDetails = payload.project;
       state.loading = false;
     },
     [fetchUserDetails.rejected]: (state) => {

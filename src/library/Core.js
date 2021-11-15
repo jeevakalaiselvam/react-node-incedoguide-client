@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setProjectDetails } from './redux/slice/projectSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDetails } from './redux/slice/userSlice';
-import Menu from './ui/menu/Menu';
-import { findProjectByName } from './util/helperMethods';
+import Menu from './menu/Menu';
+import _ from 'lodash';
 
 export default function Core({
   userId,
@@ -12,29 +11,14 @@ export default function Core({
   fullName,
   emailId,
 }) {
-  const { currentUser, allUserProjects } = useSelector((state) => state.user);
-  const { currentProject } = useSelector((state) => state.project);
-
+  const { userDetails, projectDetails } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  //Get User Details and User Project Details for the first time when Tourme Loads
   useEffect(() => {
     dispatch(
-      fetchUserDetails({ userId, fullName, emailId, projectName, environment })
+      fetchUserDetails({ userId, emailId, fullName, projectName, environment })
     );
-    if (allUserProjects.length) {
-      dispatch(
-        setProjectDetails(findProjectByName(allUserProjects, projectName))
-      );
-    }
-  }, [currentUser.userId]);
+  }, [userId, emailId, fullName, projectName, environment, dispatch]);
 
-  //Render Menu if User is Present
-  return (
-    <>
-      {currentUser.userId && (
-        <Menu userId={currentUser.userId} roleType={currentProject.roleType} />
-      )}
-    </>
-  );
+  return <>{userDetails && projectDetails && <Menu />}</>;
 }

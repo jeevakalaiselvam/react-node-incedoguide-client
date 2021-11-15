@@ -1,33 +1,27 @@
-import {
-  APIVERSION,
-  BASE_URL,
-  REST_FETCH_USER_DETAILS,
-} from '../constants/urlConstants';
+import { getBaseUrl } from '../constants/urlConstants';
 import axios from 'axios';
 
-const fetchUserDetails = async (
-  { userId, emailId, fullName, projectName },
-  environment = 'LOCAL'
-) => {
-  const url = `${BASE_URL[environment]}/${APIVERSION}/${REST_FETCH_USER_DETAILS}`;
-  try {
-    const { data } = await axios.post(url, {
-      userId,
-      emailId,
-      fullName,
-      projectName,
-    });
-    const { tourmeUser, projectsForUser } = data;
-    if (tourmeUser && projectsForUser) {
-      return { tourmeUser, projectsForUser };
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.log(error);
+//Get User Details
+export const fetchUserDetails = async ({
+  userId,
+  emailId,
+  fullName,
+  projectName,
+  environment,
+}) => {
+  const url = `${getBaseUrl(environment)}user/info`;
+  const response = await axios.post(url, {
+    userId,
+    emailId,
+    fullName,
+    projectName: projectName.toUpperCase(),
+  });
+  if (response.status === 200 || response.status === 201) {
+    return response.data;
+  } else {
+    throw new Error('No User Data obtained');
   }
 };
 
-const userAPI = { fetchUserDetails };
-
-export default userAPI;
+const userApi = { fetchUserDetails };
+export default userApi;

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Page1 from './components/Page1';
 import Page2 from './components/Page2';
 // import Tourme from 'jeeva-tourme';
@@ -15,7 +15,6 @@ import {
   NavLink,
   UncontrolledDropdown,
   DropdownToggle,
-  NavbarText,
   Container,
   DropdownMenu,
   DropdownItem,

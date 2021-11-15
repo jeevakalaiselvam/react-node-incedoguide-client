@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDetails } from './redux/slice/userSlice';
-import Menu from './menu/Menu';
-import _ from 'lodash';
+import Menu from './Menu';
 
 export default function Core({
   userId,

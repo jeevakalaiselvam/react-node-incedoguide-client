@@ -5,14 +5,18 @@ export const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
-    MENU_OPEN: (state, { payload }) => {
+    actionMenuToggle: (state, { payload }) => {
       state.menuOpen = payload;
+    },
+    actionMainMenuSelect: (state, { payload }) => {
+      state.menuOpen = false;
+      state.menuSelected = payload;
     },
   },
   extraReducers: {},
 });
 
 // Action creators are generated for each case reducer function
-export const { MENU_OPEN } = menuSlice.actions;
+export const { actionMenuToggle, actionMainMenuSelect } = menuSlice.actions;
 
 export default menuSlice.reducer;

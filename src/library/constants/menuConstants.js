@@ -1,26 +1,32 @@
-export const MAIN_MENU_OPTIONS_FOR_ROLE = {
+export const MAIN_MENU_OPTIONS = {
   TOURME_ADMIN: [
     {
       title: 'Configure Tour',
-      action: 'CONFIGURE_TOUR',
+      action: 'configure_tour',
     },
     {
       title: 'Tour Visbility',
-      action: 'TOUR_VISIBILITY',
+      action: 'tour_visibility',
     },
     {
       title: 'Project Admins',
-      action: 'PROJECT_ADMINS',
+      action: 'project_admins',
     },
     {
       title: 'Provide Feedback',
-      action: 'PROVIDE_FEEDBACK',
+      action: 'provide_feedback',
     },
   ],
   TOURME_USER: [
     {
       title: 'Provide Feedback',
-      action: 'PROVIDE_FEEDBACK',
+      action: 'provide_feedback',
     },
   ],
 };
+
+//Main Menu Actions
+export const configure_tour = 'configure_tours';
+export const tour_visibility = 'tour_visibility';
+export const project_admins = 'project_admins';
+export const provide_feedback = 'configure_tours';

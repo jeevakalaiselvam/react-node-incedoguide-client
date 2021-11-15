@@ -2,8 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dropdown } from 'reactstrap';
 import { DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { MENU_CLOSE, MENU_OPEN } from '../redux/slice/menuSlice';
-import { MAIN_MENU_OPTIONS_FOR_ROLE } from '../constants/menuConstants';
+import {
+  actionMainMenuSelect,
+  actionMenuToggle,
+} from '../redux/slice/menuSlice';
+import { MAIN_MENU_OPTIONS } from '../constants/menuConstants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,12 +18,13 @@ export default function Menu() {
   const { userDetails, projectDetails } = user;
   const { userId, fullName, emailId } = userDetails;
   const { projectId, projectName, userRole } = projectDetails;
-  console.log(menuOpen);
 
   return (
     <Dropdown
       toggle={() => {
-        menuOpen ? dispatch(MENU_OPEN(false)) : dispatch(MENU_OPEN(true));
+        menuOpen
+          ? dispatch(actionMenuToggle(false))
+          : dispatch(actionMenuToggle(true));
       }}
       isOpen={menuOpen}
     >
@@ -29,8 +33,15 @@ export default function Menu() {
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem header>Select Options</DropdownItem>
-        {MAIN_MENU_OPTIONS_FOR_ROLE[userRole].map(({ title, action }) => {
-          return <DropdownItem key={title}>{title}</DropdownItem>;
+        {MAIN_MENU_OPTIONS[userRole].map(({ title, action }) => {
+          return (
+            <DropdownItem
+              key={title}
+              onClick={() => dispatch(actionMainMenuSelect(action))}
+            >
+              {title}
+            </DropdownItem>
+          );
         })}
       </DropdownMenu>
     </Dropdown>

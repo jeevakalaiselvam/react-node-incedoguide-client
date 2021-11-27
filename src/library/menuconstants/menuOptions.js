@@ -1,0 +1,2 @@
+//Main Menu Actions
+export const MENU_OPTION_CONFIGURE_GUIDES = 'MENU_OPTION_CONFIGURE_GUIDES';

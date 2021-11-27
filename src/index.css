@@ -1,0 +1,35 @@
+ss.incedoguide-domselect {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.incedo-navbar {
+  width: 150px;
+  background-size: contain;
+}
+
+.incedo-tab-active {
+  background-color: rgb(241, 137, 0) !important;
+  color: white !important;
+}
+
+.incedo-tab {
+  margin-right: 4px;
+  background-color: #ccc;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px 5px 0px 0px !important;
+}
+
+.incedo-tab:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.incedo-pane {
+  background-color: red !important;
+}

@@ -1,0 +1,117 @@
+.incedoguide-domselect-hightlight {
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.guide-list-item {
+  display: 'flex';
+  flex-direction: 'row';
+  align-items: 'center';
+  transform: 'translateY(0px)';
+}
+
+.incedo-menu-icon {
+  transition: 0.5s all;
+  transform: rotate(-30deg);
+}
+.incedo-menu-icon:hover {
+  transform: scale(1.2) rotate(0deg);
+}
+
+.guide-blinking {
+  animation: blinking 1s linear infinite;
+  margin-right: 10px;
+  font-size: 0.8rem;
+}
+
+.incedoguide-icon {
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  transition: all 0.2s;
+}
+
+.incedoguide-domselect {
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.incedoguide-icon:hover {
+  transform: scale(1.1);
+}
+
+@keyframes blinking {
+  50% {
+    opacity: 0;
+  }
+}
+.incedo-guide-domselect-icon {
+  font-size: 3rem;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  padding: 0.5rem;
+  background-color: orange;
+  border: 2px solid orange;
+}
+.incedo-guide-domselect-help-visible {
+  position: fixed;
+  bottom: 5vh;
+  left: 5vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100000;
+  transition: 0.1s all;
+  /* animation: blinking 2s linear infinite; */
+}
+
+.incedo-guide-domselect-help-visible:hover {
+  transform: scale(1.05);
+}
+
+.incedo-guide-domselect-help-invisible {
+  font-size: 3rem;
+  position: fixed;
+  bottom: 5vh;
+  left: 5vw;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 0px !important;
+  height: 0px !important;
+  padding: 0.5rem;
+  background-color: orange;
+  transition: 0.5s all;
+}
+
+.incedo-dom-select-cancel {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: 0.5s all;
+  animation: blinking 1s linear infinite;
+}
+
+.incedoguide-badge {
+  background-color: orange !important;
+}
+
+.incedo-table-header {
+  background-color: rgb(0, 102, 161) !important;
+  color: #ffffff;
+}
+
+.incedo-quicklink {
+  background-color: rgb(0, 102, 161) !important;
+  color: #ffffff;
+  padding: 0.25rem 1.5rem;
+}
+
+.incedoguide-download {
+  background-color: orange !important;
+}

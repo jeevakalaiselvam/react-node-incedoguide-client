@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
 import CommonTabs from './ui-general/CommonTabs';
 import Footer from './ui-general/Footer';
 import {
@@ -12,6 +11,7 @@ import {
   Button,
   CardBody,
   CardTitle,
+  Table,
   CardSubtitle,
   CardText,
 } from 'reactstrap';

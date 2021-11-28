@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'reactstrap';
 import CommonTabs from './ui-general/CommonTabs';
 
 export default function LeaveHistory() {

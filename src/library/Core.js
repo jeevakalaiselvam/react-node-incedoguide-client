@@ -124,6 +124,14 @@ export default function Core({
   };
   const getHelpers = () => {};
 
+  const addVideoToStep = (steps) => {
+    const newSteps = steps.map((step) => {
+      console.log('STEP:', { ...step });
+      return step;
+    });
+    return newSteps;
+  };
+
   return (
     <>
       {}
@@ -137,7 +145,7 @@ export default function Core({
         showProgress={true}
         showSkipButton={true}
         spotlightClicks={true}
-        steps={joyrideSteps}
+        steps={addVideoToStep(joyrideSteps)}
         stepIndex={currentStepIndex}
         styles={{
           options: {

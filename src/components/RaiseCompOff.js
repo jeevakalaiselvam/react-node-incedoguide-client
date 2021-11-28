@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
 import CommonTabs from './ui-general/CommonTabs';
 import Footer from './ui-general/Footer';
 import {
@@ -14,6 +13,7 @@ import {
   CardTitle,
   CardSubtitle,
   CardText,
+  Table,
 } from 'reactstrap';
 
 export default function RaiseCompOff() {

@@ -20,11 +20,13 @@ import {
   Input,
   CardText,
   TabContent,
+  Button,
+  Col,
+  TabPane,
 } from 'reactstrap';
 import incedoImage from './assets/incedo.webp';
 //import IncedoGuide from 'jeeva-incedoguide';
 import IncedoGuide from './library/IncedoGuide';
-import { Button, Col, TabPane } from 'react-bootstrap';
 import LeaveDashboard from './components/LeaveDashboard';
 import ApplyLeave from './components/ApplyLeave';
 import RaiseCompOff from './components/RaiseCompOff';

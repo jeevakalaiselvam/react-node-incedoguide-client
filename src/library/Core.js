@@ -11,6 +11,8 @@ import {
 } from './redux/slice/projectSlice';
 import ReactJoyride, { EVENTS, STATUS } from 'react-joyride';
 import { apiFetchUserDetails } from './redux/slice/userSlice';
+import { addVideoToStep } from './util/helpers';
+import GuideToolTip from './uicomponents/GuideToolTip';
 
 export default function Core({
   userId,
@@ -124,19 +126,12 @@ export default function Core({
   };
   const getHelpers = () => {};
 
-  const addVideoToStep = (steps) => {
-    const newSteps = steps.map((step) => {
-      console.log('STEP:', { ...step });
-      return step;
-    });
-    return newSteps;
-  };
-
   return (
     <>
       {}
       {userDetails && projectDetails && <Menu />}
       <ReactJoyride
+        //tooltipComponent={GuideToolTip}
         callback={handleJoyrideCallback}
         continuous={true}
         getHelpers={getHelpers}
@@ -145,7 +140,8 @@ export default function Core({
         showProgress={true}
         showSkipButton={true}
         spotlightClicks={true}
-        steps={addVideoToStep(joyrideSteps)}
+        steps={joyrideSteps}
+        // steps={addVideoToStep(joyrideSteps)}
         stepIndex={currentStepIndex}
         styles={{
           options: {

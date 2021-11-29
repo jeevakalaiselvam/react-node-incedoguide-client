@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Card, Dropdown, FormGroup, Input, Label } from 'reactstrap';
+import { Badge, Card, Dropdown, FormGroup, Input, Label } from 'reactstrap';
 import { DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {
   ADMIN_USER,
@@ -28,6 +28,9 @@ export default function Menu() {
   const { roleType } = projectDetails;
   const { guides } = project;
 
+  const isUserAdmin =
+    projectRoles && projectRoles[MAIN_ADMIN].includes(currentUserId);
+
   return (
     <>
       <Dropdown
@@ -47,10 +50,14 @@ export default function Menu() {
           />
         </DropdownToggle>
         <DropdownMenu>
+          {isUserAdmin ? (
+            <Badge color="danger">ADMIN</Badge>
+          ) : (
+            <Badge color="primary">USER</Badge>
+          )}
           <DropdownItem header>Menu Options</DropdownItem>
           {/* Render all Admin Menu Options */}
-          {projectRoles &&
-            projectRoles[MAIN_ADMIN].includes(currentUserId) &&
+          {isUserAdmin &&
             MAIN_MENU_OPTIONS[ADMIN_USER].map(({ title, action }) => {
               return (
                 <DropdownItem
@@ -65,8 +72,7 @@ export default function Menu() {
               );
             })}
           {/* Render all Non Admin Menu Options */}
-          {projectRoles &&
-            !projectRoles[MAIN_ADMIN].includes(currentUserId) &&
+          {!isUserAdmin &&
             MAIN_MENU_OPTIONS[NORMAL_USER].map(({ title, action }) => {
               return (
                 <DropdownItem

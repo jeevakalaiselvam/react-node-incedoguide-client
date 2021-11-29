@@ -5,7 +5,7 @@ const CONFIG = {
   environment: 'LOCAL',
   emailId: 'jeeva.kalaiselvam@incedoinc.com',
   projectRoles: ['ROLE_TYPE1', 'ROLE_TYPE2'],
-  currentUserId: '12345',
+  currentUserId: '1234',
 };
 
 export default CONFIG;

@@ -5,7 +5,6 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Input,
   Card,
   CardBody,
   CardTitle,
@@ -19,12 +18,6 @@ import {
   actionMenuToggle,
 } from '../../../redux/slice/menuSlice';
 import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
-import { FormGroup, Label } from 'reactstrap';
-import {
-  CG_EDIT_STEP_EDIT_CONFIRM,
-  CG_EDIT_STEP_EDIT_DETAILS,
-  CG_EDIT_STEP_START,
-} from '../../../menuconstants/CG_EditStep';
 import {
   CG_REORDER_STEP_CHANGE_ORDER,
   CG_REORDER_STEP_CONFIRM,

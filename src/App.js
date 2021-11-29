@@ -25,7 +25,7 @@ import {
   TabPane,
 } from 'reactstrap';
 import incedoImage from './assets/incedo.webp';
-//import IncedoGuide from 'jeeva-incedoguide';
+//import IncedoGuide from 'incedoguide';
 import IncedoGuide from './library/IncedoGuide';
 import LeaveDashboard from './components/LeaveDashboard';
 import ApplyLeave from './components/ApplyLeave';

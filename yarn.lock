@@ -6056,6 +6056,24 @@
   "resolved" "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz"
   "version" "0.1.4"
 
+"incedoguide@^1.1.23":
+  "integrity" "sha512-Dz2JvFBliAPIhhT0qLtNsyYr41+AjwOyjddC1vBVeqpqLWv6msHMzKv+VcgUezYglGJ7Wnddo6PKCAMZN6xHuQ=="
+  "resolved" "https://registry.npmjs.org/incedoguide/-/incedoguide-1.1.23.tgz"
+  "version" "1.1.23"
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.36"
+    "@fortawesome/free-solid-svg-icons" "^5.15.4"
+    "@fortawesome/react-fontawesome" "^0.1.16"
+    "@reduxjs/toolkit" "^1.6.2"
+    "axios" "^0.24.0"
+    "bootstrap" "^5.1.3"
+    "react-joyride" "^2.3.2"
+    "react-redux" "^7.2.6"
+    "react-router" "^6.0.2"
+    "react-router-dom" "5.2.0"
+    "reactstrap" "^9.0.1"
+    "unique-selector" "^0.5.0"
+
 "indent-string@^4.0.0":
   "integrity" "sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg=="
   "resolved" "https://registry.npmjs.org/indent-string/-/indent-string-4.0.0.tgz"

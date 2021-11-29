@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
-    "jeeva-incedoguide": "^1.0.19",
+    "incedoguide": "^1.1.23",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-joyride": "^2.3.2",

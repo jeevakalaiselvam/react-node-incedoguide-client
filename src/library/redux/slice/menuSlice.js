@@ -16,7 +16,10 @@ import {
   MENU_TOGGLE_CLOSE,
   MENU_TOGGLE_OPEN,
 } from '../../menuconstants/mainMenu';
-import { MENU_OPTION_CONFIGURE_GUIDES } from '../../menuconstants/menuOptions';
+import {
+  MENU_OPTION_CONFIGURE_GUIDES,
+  MENU_OPTION_SETUP_ROLES,
+} from '../../menuconstants/menuOptions';
 import {
   CG_EDIT_STEP_EDIT_CONFIRM,
   CG_EDIT_STEP_EDIT_DETAILS,
@@ -106,6 +109,9 @@ export const menuSlice = createSlice({
           break;
         case MENU_OPTION_CONFIGURE_GUIDES:
           state.menuOption = MENU_OPTION_CONFIGURE_GUIDES;
+          break;
+        case MENU_OPTION_SETUP_ROLES:
+          state.menuOption = MENU_OPTION_SETUP_ROLES;
           break;
         default:
           break;

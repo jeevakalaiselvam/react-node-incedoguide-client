@@ -3,15 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Card, Dropdown } from 'reactstrap';
 import { DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {
+  ADMIN_USER,
+  MAIN_ADMIN,
   MAIN_MENU_OPTIONS,
   MENU_TOGGLE_CLOSE,
   MENU_TOGGLE_OPEN,
+  NORMAL_USER,
 } from './menuconstants/mainMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import ConfigureGuides from './menu/ConfigureGuides';
 import { actionMenuOption, actionMenuToggle } from './redux/slice/menuSlice';
 import GuideItem from './uicomponents/GuideItem';
+import SetupRoles from './menu/SetupRoles';
 export default function Menu() {
   const user = useSelector((state) => state.user);
   const menu = useSelector((state) => state.menu);
@@ -46,8 +50,8 @@ export default function Menu() {
           <DropdownItem header>Menu Options</DropdownItem>
           {/* Render all Admin Menu Options */}
           {projectRoles &&
-            projectRoles['MAIN_ADMIN'].includes(currentUserId) &&
-            MAIN_MENU_OPTIONS['ADMIN_USER'].map(({ title, action }) => {
+            projectRoles[MAIN_ADMIN].includes(currentUserId) &&
+            MAIN_MENU_OPTIONS[ADMIN_USER].map(({ title, action }) => {
               return (
                 <DropdownItem
                   key={title}
@@ -62,8 +66,8 @@ export default function Menu() {
             })}
           {/* Render all Non Admin Menu Options */}
           {projectRoles &&
-            !projectRoles['MAIN_ADMIN'].includes(currentUserId) &&
-            MAIN_MENU_OPTIONS['NORMAL_USER'].map(({ title, action }) => {
+            !projectRoles[MAIN_ADMIN].includes(currentUserId) &&
+            MAIN_MENU_OPTIONS[NORMAL_USER].map(({ title, action }) => {
               return (
                 <DropdownItem
                   key={title}
@@ -90,6 +94,7 @@ export default function Menu() {
       </Dropdown>
       {/* Render the Selected Menu Option */}
       <ConfigureGuides />
+      <SetupRoles />
     </>
   );
 }

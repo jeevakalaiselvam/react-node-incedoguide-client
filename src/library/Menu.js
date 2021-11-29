@@ -20,7 +20,7 @@ export default function Menu() {
   const { menuToggle } = menu;
   const { projectDetails, userDetails } = user;
   const { projectRoles } = projectDetails;
-  const { userId } = userDetails;
+  const { currentUserId } = userDetails;
   const { roleType } = projectDetails;
   const { guides } = project;
 
@@ -44,15 +44,10 @@ export default function Menu() {
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>Menu Options</DropdownItem>
+          {/* Render all Admin Menu Options */}
           {projectRoles &&
-            projectRoles['MAIN_ADMIN'].includes('606275') &&
-            console.log('USER IS ADMIN')}
-          {projectRoles &&
-            !projectRoles['MAIN_ADMIN'].includes('606275') &&
-            console.log('USER IS NOT ADMIN')}
-
-          {/* {roleType &&
-            MAIN_MENU_OPTIONS[roleType].map(({ title, action }) => {
+            projectRoles['MAIN_ADMIN'].includes(currentUserId) &&
+            MAIN_MENU_OPTIONS['ADMIN_USER'].map(({ title, action }) => {
               return (
                 <DropdownItem
                   key={title}
@@ -64,7 +59,23 @@ export default function Menu() {
                   {title}
                 </DropdownItem>
               );
-            })} */}
+            })}
+          {/* Render all Non Admin Menu Options */}
+          {projectRoles &&
+            !projectRoles['MAIN_ADMIN'].includes(currentUserId) &&
+            MAIN_MENU_OPTIONS['NORMAL_USER'].map(({ title, action }) => {
+              return (
+                <DropdownItem
+                  key={title}
+                  onClick={() => {
+                    dispatch(actionMenuOption(action));
+                    dispatch(actionMenuToggle(MENU_TOGGLE_CLOSE));
+                  }}
+                >
+                  {title}
+                </DropdownItem>
+              );
+            })}
           {guides.length !== 0 && (
             <DropdownItem header>Guides Available</DropdownItem>
           )}

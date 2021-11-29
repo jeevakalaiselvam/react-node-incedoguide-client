@@ -1,5 +1,5 @@
 export const MAIN_MENU_OPTIONS = {
-  MAIN_ADMIN: [
+  ADMIN_USER: [
     {
       title: 'Setup Guides',
       action: 'MENU_OPTION_CONFIGURE_GUIDES',

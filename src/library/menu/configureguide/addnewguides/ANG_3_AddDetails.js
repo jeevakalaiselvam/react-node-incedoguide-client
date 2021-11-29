@@ -20,15 +20,26 @@ import {
   actionMenuOption,
   actionMenuToggle,
 } from '../../../redux/slice/menuSlice';
-import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
+import { MAIN_ADMIN, MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
 
 export default function ANG_3_AddDetails() {
   const menu = useSelector((state) => state.menu);
+  const user = useSelector((state) => state.user);
+  const { projectDetails } = user;
+  const { projectRoles } = projectDetails;
   const { configureGuidesNewState } = menu;
   const dispatch = useDispatch();
   const [guideTitle, setGuideTitle] = useState('');
   const [stepName, setStepName] = useState('');
   const [stepContent, setStepContent] = useState('');
+  const [roleVisibilityList, setRoleVisibilityList] = useState([]);
+  const allRolesWithoutAdminRole = Object.keys(projectRoles).filter(
+    (role) => role !== MAIN_ADMIN
+  );
+
+  const roleVisibilityCheckboxChanged = (role) => {
+    setRoleVisibilityList((old) => ({ ...old, [role]: !old[role] }));
+  };
 
   return (
     <>
@@ -48,20 +59,42 @@ export default function ANG_3_AddDetails() {
         <ModalBody>
           <Form>
             {configureGuidesNewState.guideTitle === '' && (
-              <FormGroup>
-                <Label for="guideTitle">Guide Title</Label>
-                <Input
-                  id="guideTitle"
-                  name="guideTitle"
-                  placeholder=""
-                  type="text"
-                  onChange={(e) => {
-                    setGuideTitle(e.currentTarget.value);
-                  }}
-                  value={guideTitle}
-                />
-              </FormGroup>
+              <React.Fragment>
+                <FormGroup>
+                  <Label for="guideTitle">Guide Title</Label>
+                  <Input
+                    id="guideTitle"
+                    name="guideTitle"
+                    placeholder=""
+                    type="text"
+                    onChange={(e) => {
+                      setGuideTitle(e.currentTarget.value);
+                    }}
+                    value={guideTitle}
+                  />
+                </FormGroup>
+                {/* Render all Role Check boxes */}
+
+                <FormGroup>
+                  <Label for="stepName">User Roles</Label> <br />
+                  {allRolesWithoutAdminRole.map((role) => {
+                    return (
+                      <React.Fragment key={role}>
+                        <FormGroup check inline>
+                          <Input
+                            type="checkbox"
+                            checked={roleVisibilityList[role] || false}
+                            onChange={() => roleVisibilityCheckboxChanged(role)}
+                          />
+                          <Label check>{role}</Label>
+                        </FormGroup>
+                      </React.Fragment>
+                    );
+                  })}
+                </FormGroup>
+              </React.Fragment>
             )}
+
             <FormGroup>
               <Label for="stepName">Step Name</Label>
               <Input
@@ -100,6 +133,7 @@ export default function ANG_3_AddDetails() {
                 actionConfigureGuidesNewCurrentAction({
                   action: CG_NEW_CONFIRM_STEP,
                   data: {
+                    roleVisibilityList,
                     stepName,
                     stepContent,
                     guideTitle: titleAlreadyPresentInState

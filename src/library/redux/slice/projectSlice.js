@@ -28,13 +28,17 @@ export const apiGetAllGuides = createAsyncThunk(
 
 export const apiAddNewGuide = createAsyncThunk(
   'project/addNewGuide',
-  async ({ projectId, identifier, steps, title, environment }, thunkAPI) => {
+  async (
+    { projectId, identifier, steps, title, environment, roleVisibilityList },
+    thunkAPI
+  ) => {
     const response = projectApi.addNewGuide({
       projectId,
       identifier,
       steps,
       title,
       environment,
+      roleVisibilityList,
     });
     return response;
   }

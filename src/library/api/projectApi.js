@@ -28,6 +28,7 @@ export const addNewGuide = async ({
   steps = {},
   title,
   environment = 'LOCAL',
+  roleVisibilityList,
 }) => {
   const url = `${getBaseUrl(environment)}guide/add`;
   const response = await axios.post(url, {
@@ -35,6 +36,7 @@ export const addNewGuide = async ({
     identifier,
     steps,
     title,
+    roleVisibilityList,
   });
   if (response.status === 200 || response.status === 201) {
     return response.data;

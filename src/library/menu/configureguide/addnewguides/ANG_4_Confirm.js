@@ -51,6 +51,8 @@ export default function ANG_4_Confirm() {
                   identifier,
                   title: configureGuidesNewState.guideTitle,
                   steps: configureGuidesNewState.steps,
+                  roleVisibilityList:
+                    configureGuidesNewState.roleVisibilityList,
                   currentEnvironment,
                 })
               );

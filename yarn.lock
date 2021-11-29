@@ -6560,24 +6560,6 @@
     "html-escaper" "^2.0.0"
     "istanbul-lib-report" "^3.0.0"
 
-"jeeva-incedoguide@^1.0.19":
-  "integrity" "sha512-hTt1yczA3prPu0FO8bNAdHkiVwUEGk2j9LdDkZ/ob5cGk2s6TdSmcWQ+GgzjbKNfGTyi4tDtMybCfe+lZTENqw=="
-  "resolved" "https://registry.npmjs.org/jeeva-incedoguide/-/jeeva-incedoguide-1.1.19.tgz"
-  "version" "1.1.19"
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "^1.2.36"
-    "@fortawesome/free-solid-svg-icons" "^5.15.4"
-    "@fortawesome/react-fontawesome" "^0.1.16"
-    "@reduxjs/toolkit" "^1.6.2"
-    "axios" "^0.24.0"
-    "bootstrap" "^5.1.3"
-    "react-joyride" "^2.3.2"
-    "react-redux" "^7.2.6"
-    "react-router" "^6.0.2"
-    "react-router-dom" "5.2.0"
-    "reactstrap" "^9.0.1"
-    "unique-selector" "^0.5.0"
-
 "jest-changed-files@^26.6.2":
   "integrity" "sha512-fDS7szLcY9sCtIip8Fjry9oGf3I2ht/QT21bAHm5Dmf0mD4X3ReNUf17y+bO6fR8WgbIZTlbyG1ak/53cbRzKQ=="
   "resolved" "https://registry.npmjs.org/jest-changed-files/-/jest-changed-files-26.6.2.tgz"
@@ -9317,7 +9299,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.0.0", "prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.2":
+"prop-types@^15.0.0", "prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -9523,7 +9505,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0", "react-dom@^16.13.1", "react-dom@>=16.6.0", "react-dom@>=16.8.0":
+"react-dom@*", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0", "react-dom@^16.13.1", "react-dom@>=16", "react-dom@>=16.6.0", "react-dom@>=16.8.0":
   "integrity" "sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
   "version" "16.14.0"
@@ -9554,6 +9536,11 @@
     "popper.js" "^1.16.0"
     "react-proptype-conditional-require" "^1.0.4"
     "tree-changes" "^0.5.1"
+
+"react-idle-timer@^4.6.4":
+  "integrity" "sha512-iq61dPud8fgj7l1KOJEY5pyiD532fW0KcIe/5XUe/0lB/4Vytoy4tZBlLGSiYodPzKxTL6HyKoOmG6tyzjD7OQ=="
+  "resolved" "https://registry.npmjs.org/react-idle-timer/-/react-idle-timer-4.6.4.tgz"
+  "version" "4.6.4"
 
 "react-is@^16.13.1", "react-is@^16.6.0", "react-is@^16.7.0", "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
@@ -9728,7 +9715,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.13.1", "react@^16.14.0", "react@^16.14.0 || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.3 || ^17", "react@>= 16", "react@>=15", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.x":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.13.1", "react@^16.14.0", "react@^16.14.0 || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.3 || ^17", "react@>= 16", "react@>=15", "react@>=16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.x":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"

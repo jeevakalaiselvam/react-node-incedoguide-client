@@ -74,6 +74,7 @@ const initialState = {
   joyrideCurrentIndex: 0,
   loading: false,
   projectRoles: {},
+  userIdle: false,
 };
 export const projectSlicer = createSlice({
   name: 'project',
@@ -81,6 +82,9 @@ export const projectSlicer = createSlice({
   reducers: {
     actionSetEnvironment: (state, { payload }) => {
       state.currentEnvironment = payload;
+    },
+    actionSetUserIdle: (state, { payload }) => {
+      state.userIdle = payload;
     },
     actionSetIdentifier: (state, { payload }) => {
       state.identifier = payload;
@@ -163,6 +167,7 @@ export const {
   actionSetIdentifier,
   actionSetJoyrideSteps,
   actionSetJoyrideStart,
+  actionSetUserIdle,
 } = projectSlicer.actions;
 
 export default projectSlicer.reducer;

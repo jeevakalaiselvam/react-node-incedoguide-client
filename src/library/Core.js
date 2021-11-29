@@ -6,11 +6,14 @@ import {
   actionSetIdentifier,
   actionSetJoyrideStart,
   actionSetJoyrideSteps,
+  actionSetUserIdle,
   apiGetAllGuides,
   apiMarkGuideComplete,
 } from './redux/slice/projectSlice';
 import ReactJoyride, { EVENTS, STATUS } from 'react-joyride';
 import { apiFetchUserDetails } from './redux/slice/userSlice';
+import IdleTimer, { useIdleTimer } from 'react-idle-timer';
+import UserIdleModal from './uicomponents/UserIdleModal';
 
 export default function Core({
   userId,
@@ -24,7 +27,7 @@ export default function Core({
   const user = useSelector((state) => state.user);
   const project = useSelector((state) => state.project);
   const { userDetails, projectDetails } = user;
-  const { identifier, joyrideStart, joyrideSteps } = project;
+  const { identifier, joyrideStart, joyrideSteps, userIdle } = project;
   const { projectId } = projectDetails;
   const { currentEnvironment, selectedGuideId } = project;
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -130,9 +133,29 @@ export default function Core({
   };
   const getHelpers = () => {};
 
+  //Handle Idle Timer Logic
+  const handleOnIdle = (event) => {
+    dispatch(actionSetUserIdle(true));
+  };
+
+  //When user is active
+  const handleOnActive = (event) => {};
+
+  //When user does something
+  const handleOnAction = (event) => {};
+
+  const { getRemainingTime, getLastActiveTime } = useIdleTimer({
+    timeout: 1000 * 10 * 60, //10 Mins of Inactivity
+    onIdle: handleOnIdle,
+    onActive: handleOnActive,
+    onAction: handleOnAction,
+    debounce: 500,
+  });
+
   return (
     <>
-      {}
+      {/* Display Idle Modal when user is inactive */}
+      {userIdle && <UserIdleModal />}
       {userDetails && projectDetails && <Menu />}
       <ReactJoyride
         callback={handleJoyrideCallback}

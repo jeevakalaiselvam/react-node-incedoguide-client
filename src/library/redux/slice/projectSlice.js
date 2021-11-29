@@ -73,6 +73,7 @@ const initialState = {
   joyrideSteps: [],
   joyrideCurrentIndex: 0,
   loading: false,
+  projectRoles: {},
 };
 export const projectSlicer = createSlice({
   name: 'project',

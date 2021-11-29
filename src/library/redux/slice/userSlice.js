@@ -1,5 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import projectApi from '../../api/projectApi';
 import userApi from '../../api/userAPI';
+
+export const apiUpdateProjectRoles = createAsyncThunk(
+  'project/updateProjectRoles',
+  async ({ projectId, userId, environment, projectRoles }, thunkAPI) => {
+    const response = projectApi.updateProjectRoles({
+      projectId,
+      userId,
+      projectRoles,
+      environment,
+    });
+    return response;
+  }
+);
 
 export const apiFetchUserDetails = createAsyncThunk(
   'users/fetchUserDetails',
@@ -60,6 +74,16 @@ export const userSlice = createSlice({
     },
     [apiFetchUserDetails.rejected]: (state) => {
       state.loading = false;
+    },
+    [apiUpdateProjectRoles.pending]: (state) => {
+      state.loading = true;
+    },
+    [apiUpdateProjectRoles.fulfilled]: (state, { payload }) => {
+      state.projectDetails.projectRoles = payload.projectRoles;
+      state.loading = true;
+    },
+    [apiUpdateProjectRoles.rejected]: (state) => {
+      state.loading = true;
     },
   },
 });

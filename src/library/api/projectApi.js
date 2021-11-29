@@ -101,11 +101,32 @@ export const deleteGuides = async ({
   }
 };
 
+//Update Project Roles
+export const updateProjectRoles = async ({
+  userId,
+  projectId = '',
+  projectRoles,
+  environment = 'LOCAL',
+}) => {
+  const url = `${getBaseUrl(environment)}project/updateRoles`;
+  const response = await axios.post(url, {
+    userId,
+    projectId,
+    projectRoles,
+  });
+  if (response.status === 200 || response.status === 201) {
+    return response.data;
+  } else {
+    throw new Error('Updating Project Roles Failed');
+  }
+};
+
 const projectApi = {
   addNewGuide,
   getAllGuides,
   markGuideComplete,
   updateGuide,
   deleteGuides,
+  updateProjectRoles,
 };
 export default projectApi;

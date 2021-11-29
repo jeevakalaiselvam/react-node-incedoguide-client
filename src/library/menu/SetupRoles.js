@@ -14,6 +14,7 @@ import {
   FormGroup,
   ListGroup,
   ListGroupItem,
+  InputGroup,
 } from 'reactstrap';
 import {
   actionConfigureGuidesOption,
@@ -26,84 +27,18 @@ import AddStepsExistingGuide from './configureguide/AddStepsExistingGuide';
 import EditStepsExisting from './configureguide/EditStepsExisting';
 import ReorderStepsExisting from './configureguide/ReorderStepsExisting';
 import DeleteGuides from './configureguide/DeleteGuides';
+import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../menuconstants/SR_Setup';
+import SR_Start from './setupRoles/SR_Start';
+import SR_Confirm from './setupRoles/SR_Confirm';
 
 export default function SetupRoles() {
   const menu = useSelector((state) => state.menu);
-  const user = useSelector((state) => state.user);
-  const { projectDetails } = user;
-  const { projectRoles } = projectDetails;
-  const dispatch = useDispatch();
-  const { menuOption } = menu;
-  const [roleSelected, setRoleSelected] = useState(MAIN_ADMIN);
-
-  const roleSelectHandler = (e) => {
-    e.persist();
-    setRoleSelected((old) => e.target.value);
-  };
-
-  useEffect(() => {
-    //console.log(roleSelected);
-  }, [roleSelected]);
+  const { setupRolesState } = menu;
 
   return (
     <>
-      <Modal
-        toggle={function noRefCheck() {}}
-        isOpen={menuOption === MENU_OPTION_SETUP_ROLES}
-      >
-        <ModalHeader
-          toggle={() => {
-            dispatch(actionMenuOption(''));
-            dispatch(actionMenuToggle(MENU_TOGGLE_OPEN));
-          }}
-        >
-          Setup Roles for Users
-        </ModalHeader>
-        <ModalBody>
-          {/* List all the Roles */}
-          <FormGroup>
-            <Label for="role">Select Role</Label>
-            <Input
-              id="role"
-              name="role"
-              type="select"
-              value={roleSelected}
-              onChange={roleSelectHandler}
-            >
-              {projectRoles &&
-                Object.keys(projectRoles).map((roleKey) => {
-                  return <option key={roleKey}>{roleKey}</option>;
-                })}
-            </Input>
-          </FormGroup>
-          {/* List all the Users for Roles */}
-          <h5>Users present in Roles</h5>
-          <ListGroup>
-            {projectRoles &&
-              projectRoles[roleSelected].length !== 0 &&
-              projectRoles[roleSelected].map((user) => {
-                return <ListGroupItem key={user}>{user}</ListGroupItem>;
-              })}
-            {projectRoles && projectRoles[roleSelected].length === 0 && (
-              <p>No Users Present!</p>
-            )}
-          </ListGroup>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={() => {}}>
-            Confirm
-          </Button>{' '}
-          <Button
-            onClick={() => {
-              dispatch(actionMenuOption(''));
-              dispatch(actionMenuToggle(MENU_TOGGLE_OPEN));
-            }}
-          >
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
-      {/* Render all Components under Setup Roles */}
+      {setupRolesState.currentAction === SR_SETUP_START && <SR_Start />}
+      {setupRolesState.currentAction === SR_SETUP_CONFIRM && <SR_Confirm />}
     </>
   );
 }

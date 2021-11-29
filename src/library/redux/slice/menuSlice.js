@@ -37,6 +37,7 @@ import {
   CG_DELETE_GUIDE_CONFIRM,
   CG_DELETE_GUIDE_START,
 } from '../../menuconstants/CG_DeleteGuide';
+import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../../menuconstants/SR_Setup';
 import {
   CG_REORDER_STEP_CHANGE_ORDER,
   CG_REORDER_STEP_CONFIRM,
@@ -47,6 +48,7 @@ const initialState = {
   menuToggle: '',
   menuOption: '',
   configureGuidesOption: '',
+  setupRolesOption: '',
   configureGuidesNewState: {
     currentAction: '',
     steps: [],
@@ -82,6 +84,11 @@ const initialState = {
     oldGuides: [],
     guideIdsToDelete: [],
   },
+  setupRolesState: {
+    currentAction: '',
+    oldRoles: {},
+    newRoles: {},
+  },
 };
 export const menuSlice = createSlice({
   name: 'menu',
@@ -112,6 +119,7 @@ export const menuSlice = createSlice({
           break;
         case MENU_OPTION_SETUP_ROLES:
           state.menuOption = MENU_OPTION_SETUP_ROLES;
+          state.setupRolesState.currentAction = SR_SETUP_START;
           break;
         default:
           break;
@@ -339,6 +347,26 @@ export const menuSlice = createSlice({
           break;
       }
     },
+    //Setup Roles State
+    actionSetupRolesCurrentAction: (state, { payload: { action, data } }) => {
+      switch (action) {
+        case '':
+          state.setupRolesState.currentAction = '';
+          state.setupRolesState.oldRoles = {};
+          state.setupRolesState.newRoles = {};
+          break;
+        case SR_SETUP_START:
+          state.setupRolesState.currentAction = SR_SETUP_START;
+          break;
+        case SR_SETUP_CONFIRM:
+          state.setupRolesState.currentAction = SR_SETUP_CONFIRM;
+          state.setupRolesState.oldRoles = data.oldRoles;
+          state.setupRolesState.newRoles = data.newRoles;
+          break;
+        default:
+          break;
+      }
+    },
   },
   extraReducers: {},
 });
@@ -353,6 +381,7 @@ export const {
   actionConfigureGuidesEditStepsCurrentAction,
   actionConfigureGuidesReorderStepsCurrentAction,
   actionConfigureGuidesDeleteGuidesCurrentAction,
+  actionSetupRolesCurrentAction,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

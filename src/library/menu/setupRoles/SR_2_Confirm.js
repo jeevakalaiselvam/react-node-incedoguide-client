@@ -29,7 +29,7 @@ import {
   SR_SETUP_UPDATE,
 } from '../../menuconstants/SR_Setup';
 
-export default function SR_Confirm() {
+export default function SR_2_Confirm() {
   const menu = useSelector((state) => state.menu);
   const user = useSelector((state) => state.user);
   const project = useSelector((state) => state.project);
@@ -52,6 +52,11 @@ export default function SR_Confirm() {
         <ModalHeader
           toggle={() => {
             dispatch(actionMenuOption(''));
+            dispatch(
+              actionSetupRolesCurrentAction({
+                action: '',
+              })
+            );
             dispatch(actionMenuToggle(MENU_TOGGLE_OPEN));
           }}
         >
@@ -69,6 +74,12 @@ export default function SR_Confirm() {
                   environment: currentEnvironment,
                 })
               );
+              dispatch(actionMenuOption(''));
+              dispatch(
+                actionSetupRolesCurrentAction({
+                  action: '',
+                })
+              );
             }}
           >
             YES
@@ -76,6 +87,11 @@ export default function SR_Confirm() {
           <Button
             onClick={() => {
               dispatch(actionMenuOption(''));
+              dispatch(
+                actionSetupRolesCurrentAction({
+                  action: '',
+                })
+              );
               dispatch(actionMenuToggle(MENU_TOGGLE_OPEN));
             }}
           >

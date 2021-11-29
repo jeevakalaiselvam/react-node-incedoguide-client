@@ -79,7 +79,7 @@ export const userSlice = createSlice({
       state.loading = true;
     },
     [apiUpdateProjectRoles.fulfilled]: (state, { payload }) => {
-      state.projectDetails.projectRoles = payload.projectRoles;
+      state.projectDetails.projectRoles = payload.project.projectRoles;
       state.loading = true;
     },
     [apiUpdateProjectRoles.rejected]: (state) => {

@@ -101,6 +101,13 @@
   background-color: orange !important;
 }
 
+.incedo-delete-badge {
+  cursor: pointer;
+}
+.incedo-delete-badge:hover {
+  background-color: red !important;
+}
+
 .incedo-table-header {
   background-color: rgb(0, 102, 161) !important;
   color: #ffffff;

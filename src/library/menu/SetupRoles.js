@@ -28,8 +28,8 @@ import EditStepsExisting from './configureguide/EditStepsExisting';
 import ReorderStepsExisting from './configureguide/ReorderStepsExisting';
 import DeleteGuides from './configureguide/DeleteGuides';
 import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../menuconstants/SR_Setup';
-import SR_Start from './setupRoles/SR_Start';
-import SR_Confirm from './setupRoles/SR_Confirm';
+import SR_1_Start from './setupRoles/SR_1_Start';
+import SR_2_Confirm from './setupRoles/SR_2_Confirm';
 
 export default function SetupRoles() {
   const menu = useSelector((state) => state.menu);
@@ -37,8 +37,8 @@ export default function SetupRoles() {
 
   return (
     <>
-      {setupRolesState.currentAction === SR_SETUP_START && <SR_Start />}
-      {setupRolesState.currentAction === SR_SETUP_CONFIRM && <SR_Confirm />}
+      {setupRolesState.currentAction === SR_SETUP_START && <SR_1_Start />}
+      {setupRolesState.currentAction === SR_SETUP_CONFIRM && <SR_2_Confirm />}
     </>
   );
 }

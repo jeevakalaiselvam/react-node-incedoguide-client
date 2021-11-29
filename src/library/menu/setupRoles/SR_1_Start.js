@@ -14,6 +14,7 @@ import {
   ListGroup,
   ListGroupItem,
   InputGroup,
+  Badge,
 } from 'reactstrap';
 import {
   actionConfigureGuidesDeleteGuidesCurrentAction,
@@ -25,7 +26,7 @@ import {
 import { MAIN_ADMIN, MENU_TOGGLE_OPEN } from '../../menuconstants/mainMenu';
 import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../../menuconstants/SR_Setup';
 
-export default function SR_Start() {
+export default function SR_1_Start() {
   const menu = useSelector((state) => state.menu);
   const user = useSelector((state) => state.user);
   const { projectDetails } = user;
@@ -58,6 +59,21 @@ export default function SR_Start() {
     console.log(newUserUpdatedRoles);
   };
 
+  const deleteUserHandler = (user) => {
+    console.log('DELETE', user, roleSelected);
+    const newUserUpdatedRoles = {
+      ...newRoles,
+      [roleSelected]: [
+        ...newRoles[roleSelected].filter(
+          (alreadyPresentUser) => alreadyPresentUser !== user
+        ),
+      ],
+    };
+
+    setNewRoles((old) => newUserUpdatedRoles);
+    console.log(newUserUpdatedRoles);
+  };
+
   useEffect(() => {}, [roleSelected]);
 
   return (
@@ -69,6 +85,11 @@ export default function SR_Start() {
         <ModalHeader
           toggle={() => {
             dispatch(actionMenuOption(''));
+            dispatch(
+              actionSetupRolesCurrentAction({
+                action: '',
+              })
+            );
             dispatch(actionMenuToggle(MENU_TOGGLE_OPEN));
           }}
         >
@@ -92,14 +113,25 @@ export default function SR_Start() {
             </Input>
           </FormGroup>
           {/* List all the Users for Roles */}
-          <h5>Users present in Roles</h5>
+          <h5>User IDS in selected role</h5>
           <ListGroup>
             {newRoles &&
               newRoles[roleSelected].length !== 0 &&
               newRoles[roleSelected].map((user) => {
                 return (
                   <React.Fragment key={user}>
-                    <ListGroupItem>{user}</ListGroupItem>
+                    <ListGroupItem
+                      style={{ display: 'flex', flexDirection: 'row' }}
+                    >
+                      <span style={{ flex: '1' }}>{user}</span>
+                      <Badge
+                        color="danger"
+                        className="incedo-delete-badge"
+                        onClick={() => deleteUserHandler(user)}
+                      >
+                        DELETE
+                      </Badge>
+                    </ListGroupItem>
                   </React.Fragment>
                 );
               })}
@@ -118,7 +150,9 @@ export default function SR_Start() {
                 placeholder="Enter New User ID"
                 type="text"
               />
-              <Button onClick={newUserSubmitHandler}>Add User</Button>
+              <Button color="primary" onClick={newUserSubmitHandler}>
+                Add User
+              </Button>
             </InputGroup>
           </FormGroup>
         </ModalBody>
@@ -142,6 +176,11 @@ export default function SR_Start() {
           <Button
             onClick={() => {
               dispatch(actionMenuOption(''));
+              dispatch(
+                actionSetupRolesCurrentAction({
+                  action: '',
+                })
+              );
               dispatch(actionMenuToggle(MENU_TOGGLE_OPEN));
             }}
           >

@@ -68,6 +68,8 @@ function App() {
                   projectName={CONFIG.projectName}
                   fullName={CONFIG.fullName}
                   emailId={CONFIG.emailId}
+                  projectRoles={CONFIG.projectRoles}
+                  currentUserId={CONFIG.currentUserId}
                 />
               </Collapse>
             </Navbar>

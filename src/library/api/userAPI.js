@@ -8,6 +8,8 @@ export const fetchUserDetails = async ({
   fullName,
   projectName,
   environment,
+  projectRoles,
+  currentUserId,
 }) => {
   const url = `${getBaseUrl(environment)}user/info`;
   const response = await axios.post(url, {
@@ -15,9 +17,11 @@ export const fetchUserDetails = async ({
     emailId,
     fullName,
     projectName: projectName.toUpperCase(),
+    projectRoles,
+    currentUserId,
   });
   if (response.status === 200 || response.status === 201) {
-    return response.data;
+    return { ...response.data, currentUserId };
   } else {
     throw new Error('No User Data obtained');
   }

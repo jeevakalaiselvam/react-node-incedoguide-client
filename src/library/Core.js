@@ -18,6 +18,8 @@ export default function Core({
   projectName,
   fullName,
   emailId,
+  projectRoles,
+  currentUserId,
 }) {
   const user = useSelector((state) => state.user);
   const project = useSelector((state) => state.project);
@@ -37,6 +39,8 @@ export default function Core({
         fullName,
         projectName,
         currentEnvironment,
+        projectRoles,
+        currentUserId,
       })
     );
     if (typeof window !== 'undefined') {
@@ -51,6 +55,8 @@ export default function Core({
     currentEnvironment,
     dispatch,
     environment,
+    currentUserId,
+    projectRoles,
   ]);
 
   useEffect(() => {

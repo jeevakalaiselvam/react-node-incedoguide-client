@@ -3,13 +3,26 @@ import userApi from '../../api/userAPI';
 
 export const apiFetchUserDetails = createAsyncThunk(
   'users/fetchUserDetails',
-  async ({ userId, emailId, fullName, projectName, environment }, thunkAPI) => {
+  async (
+    {
+      userId,
+      emailId,
+      fullName,
+      projectName,
+      environment,
+      projectRoles,
+      currentUserId,
+    },
+    thunkAPI
+  ) => {
     const response = userApi.fetchUserDetails({
       userId,
       emailId,
       fullName,
       projectName,
       environment,
+      projectRoles,
+      currentUserId,
     });
     return response;
   }
@@ -38,7 +51,10 @@ export const userSlice = createSlice({
       state.loading = true;
     },
     [apiFetchUserDetails.fulfilled]: (state, { payload }) => {
-      state.userDetails = payload.user;
+      state.userDetails = {
+        ...payload.user,
+        currentUserId: payload.currentUserId,
+      };
       state.projectDetails = payload.project;
       state.loading = false;
     },

@@ -18,7 +18,9 @@ export default function Menu() {
   const project = useSelector((state) => state.project);
   const dispatch = useDispatch();
   const { menuToggle } = menu;
-  const { projectDetails } = user;
+  const { projectDetails, userDetails } = user;
+  const { projectRoles } = projectDetails;
+  const { userId } = userDetails;
   const { roleType } = projectDetails;
   const { guides } = project;
 
@@ -42,7 +44,14 @@ export default function Menu() {
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>Menu Options</DropdownItem>
-          {roleType &&
+          {projectRoles &&
+            projectRoles['MAIN_ADMIN'].includes('606275') &&
+            console.log('USER IS ADMIN')}
+          {projectRoles &&
+            !projectRoles['MAIN_ADMIN'].includes('606275') &&
+            console.log('USER IS NOT ADMIN')}
+
+          {/* {roleType &&
             MAIN_MENU_OPTIONS[roleType].map(({ title, action }) => {
               return (
                 <DropdownItem
@@ -55,7 +64,7 @@ export default function Menu() {
                   {title}
                 </DropdownItem>
               );
-            })}
+            })} */}
           {guides.length !== 0 && (
             <DropdownItem header>Guides Available</DropdownItem>
           )}

@@ -11,6 +11,7 @@ export default function IncedoGuide({
   emailId,
   projectRoles,
   currentUserId,
+  currentUserRoles,
 }) {
   return (
     <Provider store={store}>
@@ -22,6 +23,7 @@ export default function IncedoGuide({
         emailId={emailId}
         projectRoles={projectRoles}
         currentUserId={currentUserId}
+        currentUserRoles={currentUserRoles}
       />
     </Provider>
   );

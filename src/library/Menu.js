@@ -16,6 +16,7 @@ import ConfigureGuides from './menu/ConfigureGuides';
 import { actionMenuOption, actionMenuToggle } from './redux/slice/menuSlice';
 import GuideItem from './uicomponents/GuideItem';
 import SetupRoles from './menu/SetupRoles';
+import { checkIfGuideShouldBeVisibleToUser } from '../helper/util';
 export default function Menu() {
   const user = useSelector((state) => state.user);
   const menu = useSelector((state) => state.menu);
@@ -24,7 +25,7 @@ export default function Menu() {
   const { menuToggle } = menu;
   const { projectDetails, userDetails } = user;
   const { projectRoles } = projectDetails;
-  const { currentUserId } = userDetails;
+  const { currentUserId, currentUserRoles } = userDetails;
   const { roleType } = projectDetails;
   const { guides } = project;
 
@@ -89,13 +90,31 @@ export default function Menu() {
           {guides.length !== 0 && (
             <DropdownItem header>Guides Available</DropdownItem>
           )}
-          {guides.map((guide) => {
-            return (
-              <DropdownItem key={guide.guideId} key={guide.guideId}>
-                <GuideItem title={guide.title} guideId={guide.guideId} />
-              </DropdownItem>
-            );
-          })}
+          {/* Render all Guides if User is Admin */}
+          {isUserAdmin &&
+            guides.map((guide) => {
+              return (
+                <DropdownItem key={guide.guideId} key={guide.guideId}>
+                  <GuideItem title={guide.title} guideId={guide.guideId} />
+                </DropdownItem>
+              );
+            })}
+          {/* If User is not ADMIN, Render Guides only based on current Role */}
+          {!isUserAdmin &&
+            guides.map((guide) => {
+              if (
+                checkIfGuideShouldBeVisibleToUser(
+                  guide.roleVisibility,
+                  currentUserRoles
+                )
+              ) {
+                return (
+                  <DropdownItem key={guide.guideId} key={guide.guideId}>
+                    <GuideItem title={guide.title} guideId={guide.guideId} />
+                  </DropdownItem>
+                );
+              }
+            })}
         </DropdownMenu>
       </Dropdown>
       {/* Render the Selected Menu Option */}

@@ -70,6 +70,7 @@ function App() {
                   emailId={CONFIG.emailId}
                   projectRoles={CONFIG.projectRoles}
                   currentUserId={CONFIG.currentUserId}
+                  currentUserRoles={CONFIG.currentUserRoles}
                 />
               </Collapse>
             </Navbar>

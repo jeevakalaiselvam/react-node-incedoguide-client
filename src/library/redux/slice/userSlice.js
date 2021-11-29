@@ -26,6 +26,7 @@ export const apiFetchUserDetails = createAsyncThunk(
       environment,
       projectRoles,
       currentUserId,
+      currentUserRoles,
     },
     thunkAPI
   ) => {
@@ -37,6 +38,7 @@ export const apiFetchUserDetails = createAsyncThunk(
       environment,
       projectRoles,
       currentUserId,
+      currentUserRoles,
     });
     return response;
   }
@@ -68,6 +70,7 @@ export const userSlice = createSlice({
       state.userDetails = {
         ...payload.user,
         currentUserId: payload.currentUserId,
+        currentUserRoles: payload.currentUserRoles,
       };
       state.projectDetails = payload.project;
       state.loading = false;

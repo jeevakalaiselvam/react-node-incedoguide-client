@@ -66,11 +66,12 @@
   cursor: pointer;
   z-index: 100000;
   transition: 0.1s all;
-  /* animation: blinking 2s linear infinite; */
+  animation: blinking 1s linear infinite;
 }
 
 .incedo-guide-domselect-help-visible:hover {
   transform: scale(1.05);
+  animation: none;
 }
 
 .incedo-guide-domselect-help-invisible {

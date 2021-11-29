@@ -12,7 +12,12 @@ export default function UserIdleModal() {
 
   return (
     <Modal toggle={function noRefCheck() {}} isOpen={true}>
-      <ModalHeader toggle={function noRefCheck() {}}>
+      <ModalHeader
+        toggle={() => {
+          dispatch(actionSetUserIdle(false));
+          dispatch(actionMenuToggle(MENU_TOGGLE_CLOSE));
+        }}
+      >
         Are you Lost ?
       </ModalHeader>
       <ModalFooter>

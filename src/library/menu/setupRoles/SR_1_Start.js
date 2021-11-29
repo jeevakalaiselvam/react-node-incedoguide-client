@@ -56,11 +56,9 @@ export default function SR_1_Start() {
     };
 
     setNewRoles((old) => newUserUpdatedRoles);
-    console.log(newUserUpdatedRoles);
   };
 
   const deleteUserHandler = (user) => {
-    console.log('DELETE', user, roleSelected);
     const newUserUpdatedRoles = {
       ...newRoles,
       [roleSelected]: [

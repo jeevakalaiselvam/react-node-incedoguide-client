@@ -73,6 +73,7 @@ const initialState = {
     selectedGuideId: '',
     insertionIndex: '',
     oldGuide: {},
+    roleVisibilityList: {},
   },
   configureGuidesEditStepsState: {
     currentAction: '',

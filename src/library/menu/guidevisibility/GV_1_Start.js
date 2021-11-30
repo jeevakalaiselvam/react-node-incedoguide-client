@@ -50,8 +50,31 @@ export default function GV_1_Start() {
     setGuideSelected(+e.target.value);
   };
 
+  useEffect(() => {
+    console.log('ROLES CHANGED', rolesInGuides);
+  });
+
   const checkboxChangedHandler = (roleKey) => {
     console.log(roleKey);
+    if (rolesInGuides[guideSelected].includes(roleKey)) {
+      let newRolesInGuides = [...rolesInGuides[guideSelected]];
+      newRolesInGuides = rolesInGuides[guideSelected].filter(
+        (role) => role !== roleKey
+      );
+      const newRolesInGuidesAltered = {
+        ...rolesInGuides,
+        [guideSelected]: newRolesInGuides,
+      };
+      setRolesInGuides((old) => newRolesInGuidesAltered);
+    } else {
+      let newRolesInGuides = [...rolesInGuides[guideSelected]];
+      newRolesInGuides.push(roleKey);
+      const newRolesInGuidesAltered = {
+        ...rolesInGuides,
+        [guideSelected]: newRolesInGuides,
+      };
+      setRolesInGuides((old) => newRolesInGuidesAltered);
+    }
   };
 
   return (

@@ -16,7 +16,7 @@ export default function UserIdleModal() {
           dispatch(actionMenuToggle(MENU_TOGGLE_CLOSE));
         }}
       >
-        Are you Lost ?
+        Need some help ?
       </ModalHeader>
       <ModalFooter>
         <Button

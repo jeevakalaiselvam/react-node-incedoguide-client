@@ -6,7 +6,7 @@ const CONFIG = {
   emailId: 'jeeva.kalaiselvam@incedoinc.com',
   projectRoles: ['ROLE_TYPE1', 'ROLE_TYPE2'],
   currentUserId: '606275',
-  currentUserRoles: ['ROLE_TYPE2'],
+  currentUserRoles: ['ROLE_TYPE1'],
 };
 
 export default CONFIG;

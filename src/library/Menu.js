@@ -24,7 +24,7 @@ export default function Menu() {
   const dispatch = useDispatch();
   const { menuToggle } = menu;
   const { projectDetails, userDetails } = user;
-  const { projectRoles } = projectDetails;
+  const { projectRoles, userId } = projectDetails;
   const { currentUserId, currentUserRoles } = userDetails;
   const { roleType } = projectDetails;
   const { guides } = project;
@@ -52,7 +52,11 @@ export default function Menu() {
         </DropdownToggle>
         <DropdownMenu style={{ minWidth: '225px' }}>
           {isUserAdmin ? (
-            <Badge color="danger">ADMIN</Badge>
+            currentUserId == userId ? (
+              <Badge color="danger">PROJECT ADMIN</Badge>
+            ) : (
+              <Badge color="warning">ADMIN</Badge>
+            )
           ) : (
             <Badge color="primary">USER</Badge>
           )}

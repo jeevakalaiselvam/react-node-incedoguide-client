@@ -30,7 +30,7 @@ export default function SR_1_Start() {
   const menu = useSelector((state) => state.menu);
   const user = useSelector((state) => state.user);
   const { projectDetails } = user;
-  const { projectRoles } = projectDetails;
+  const { projectRoles, userId } = projectDetails;
   const dispatch = useDispatch();
   const { menuOption } = menu;
   const { setupRolesState } = menu;
@@ -122,13 +122,21 @@ export default function SR_1_Start() {
                       style={{ display: 'flex', flexDirection: 'row' }}
                     >
                       <span style={{ flex: '1' }}>{user}</span>
-                      <Badge
-                        color="danger"
-                        className="incedo-delete-badge"
-                        onClick={() => deleteUserHandler(user)}
-                      >
-                        DELETE
-                      </Badge>
+                      {/* Show Delete only if user is not the main initial admin */}
+                      {user != userId && (
+                        <Badge
+                          color="danger"
+                          className="incedo-delete-badge"
+                          onClick={() => deleteUserHandler(user)}
+                        >
+                          DELETE
+                        </Badge>
+                      )}
+                      {user == userId && (
+                        <Badge color="success" onClick={() => {}}>
+                          PROJECT ADMIN
+                        </Badge>
+                      )}
                     </ListGroupItem>
                   </React.Fragment>
                 );

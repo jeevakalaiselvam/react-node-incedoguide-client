@@ -33,7 +33,7 @@ export default function Menu() {
     projectRoles && projectRoles[MAIN_ADMIN].includes(currentUserId);
 
   return (
-    <>
+    <React.Fragment>
       <Dropdown
         toggle={() => {
           menuToggle === MENU_TOGGLE_OPEN
@@ -50,7 +50,7 @@ export default function Menu() {
             style={{ width: '50px', height: '50px' }}
           />
         </DropdownToggle>
-        <DropdownMenu>
+        <DropdownMenu style={{ minWidth: '225px' }}>
           {isUserAdmin ? (
             <Badge color="danger">ADMIN</Badge>
           ) : (
@@ -120,6 +120,6 @@ export default function Menu() {
       {/* Render the Selected Menu Option */}
       <ConfigureGuides />
       <SetupRoles />
-    </>
+    </React.Fragment>
   );
 }

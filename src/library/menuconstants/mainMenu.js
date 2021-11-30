@@ -8,6 +8,10 @@ export const MAIN_MENU_OPTIONS = {
       title: 'Setup Roles',
       action: 'MENU_OPTION_SETUP_ROLES',
     },
+    {
+      title: 'Setup Visibility',
+      action: 'MENU_OPTION_SETUP_VISIBILITY',
+    },
   ],
   NORMAL_USER: [
     {

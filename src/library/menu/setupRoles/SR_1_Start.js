@@ -20,14 +20,17 @@ import {
   actionSetupRolesCurrentAction,
 } from '../../redux/slice/menuSlice';
 import { MAIN_ADMIN, MENU_TOGGLE_OPEN } from '../../menuconstants/mainMenu';
-import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../../menuconstants/SR_Setup';
+import {
+  SR_SETUP_CONFIRM,
+  SR_SETUP_START,
+} from '../../menuconstants/setupRoles';
 
 export default function SR_1_Start() {
   const menu = useSelector((state) => state.menu);
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const { projectDetails } = user;
   const { projectRoles, userId } = projectDetails;
-  const dispatch = useDispatch();
   const { setupRolesState } = menu;
   const [roleSelected, setRoleSelected] = useState(MAIN_ADMIN);
   const [newUser, setNewUser] = useState('');

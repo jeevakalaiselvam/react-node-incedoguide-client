@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../menuconstants/SR_Setup';
+import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../menuconstants/setupRoles';
 import SR_1_Start from './setupRoles/SR_1_Start';
 import SR_2_Confirm from './setupRoles/SR_2_Confirm';
 

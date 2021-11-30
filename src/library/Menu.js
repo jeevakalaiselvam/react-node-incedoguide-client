@@ -15,6 +15,7 @@ import { actionMenuOption, actionMenuToggle } from './redux/slice/menuSlice';
 import GuideItem from './uicomponents/GuideItem';
 import SetupRoles from './menu/SetupRoles';
 import { checkIfGuideShouldBeVisibleToUser } from '../helper/util';
+import GuideVisibility from './menu/GuideVisibility';
 export default function Menu() {
   const user = useSelector((state) => state.user);
   const menu = useSelector((state) => state.menu);
@@ -123,6 +124,7 @@ export default function Menu() {
       {/* Render the Selected Menu Option */}
       <ConfigureGuides />
       <SetupRoles />
+      <GuideVisibility />
     </React.Fragment>
   );
 }

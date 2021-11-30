@@ -8,7 +8,7 @@ import {
 } from '../../redux/slice/menuSlice';
 import { apiUpdateProjectRoles } from '../../redux/slice/userSlice';
 import { MENU_TOGGLE_OPEN } from '../../menuconstants/mainMenu';
-import { SR_SETUP_CONFIRM } from '../../menuconstants/SR_Setup';
+import { SR_SETUP_CONFIRM } from '../../menuconstants/setupRoles';
 
 export default function SR_2_Confirm() {
   const menu = useSelector((state) => state.menu);

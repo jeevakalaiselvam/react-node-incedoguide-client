@@ -18,6 +18,7 @@ import {
 } from '../../menuconstants/mainMenu';
 import {
   MENU_OPTION_CONFIGURE_GUIDES,
+  MENU_OPTION_SETUP_VISIBILITY,
   MENU_OPTION_SETUP_ROLES,
 } from '../../menuconstants/menuOptions';
 import {
@@ -37,7 +38,14 @@ import {
   CG_DELETE_GUIDE_CONFIRM,
   CG_DELETE_GUIDE_START,
 } from '../../menuconstants/CG_DeleteGuide';
-import { SR_SETUP_CONFIRM, SR_SETUP_START } from '../../menuconstants/SR_Setup';
+import {
+  SR_SETUP_CONFIRM,
+  SR_SETUP_START,
+} from '../../menuconstants/setupRoles';
+import {
+  GV_SETUP_CONFIRM,
+  GV_SETUP_START,
+} from '../../menuconstants/guideVisibility';
 import {
   CG_REORDER_STEP_CHANGE_ORDER,
   CG_REORDER_STEP_CONFIRM,
@@ -90,6 +98,9 @@ const initialState = {
     oldRoles: {},
     newRoles: {},
   },
+  guideVisibility: {
+    currentAction: '',
+  },
 };
 export const menuSlice = createSlice({
   name: 'menu',
@@ -121,6 +132,10 @@ export const menuSlice = createSlice({
         case MENU_OPTION_SETUP_ROLES:
           state.menuOption = MENU_OPTION_SETUP_ROLES;
           state.setupRolesState.currentAction = SR_SETUP_START;
+          break;
+        case MENU_OPTION_SETUP_VISIBILITY:
+          state.menuOption = MENU_OPTION_SETUP_VISIBILITY;
+          state.guideVisibility.currentAction = GV_SETUP_START;
           break;
         default:
           break;
@@ -370,6 +385,25 @@ export const menuSlice = createSlice({
           break;
       }
     },
+    //Setup Guide Visibility
+    actionGuideVisibilityCurrentAction: (
+      state,
+      { payload: { action, data } }
+    ) => {
+      switch (action) {
+        case '':
+          state.guideVisibility.currentAction = '';
+          break;
+        case GV_SETUP_START:
+          state.guideVisibility.currentAction = GV_SETUP_START;
+          break;
+        case GV_SETUP_CONFIRM:
+          state.guideVisibility.currentAction = GV_SETUP_CONFIRM;
+          break;
+        default:
+          break;
+      }
+    },
   },
   extraReducers: {},
 });
@@ -385,6 +419,7 @@ export const {
   actionConfigureGuidesReorderStepsCurrentAction,
   actionConfigureGuidesDeleteGuidesCurrentAction,
   actionSetupRolesCurrentAction,
+  actionGuideVisibilityCurrentAction,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

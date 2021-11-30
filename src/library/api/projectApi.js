@@ -123,6 +123,26 @@ export const updateProjectRoles = async ({
   }
 };
 
+//Update Guide Roles
+export const updateGuideRoles = async ({
+  projectId,
+  identifier,
+  rolesInGuides,
+  environment = 'LOCAL',
+}) => {
+  const url = `${getBaseUrl(environment)}guide/updateRoles`;
+  const response = await axios.post(url, {
+    projectId,
+    identifier,
+    rolesInGuides,
+  });
+  if (response.status === 200 || response.status === 201) {
+    return response.data;
+  } else {
+    throw new Error('Updating Guide Roles Failed');
+  }
+};
+
 const projectApi = {
   addNewGuide,
   getAllGuides,
@@ -130,5 +150,6 @@ const projectApi = {
   updateGuide,
   deleteGuides,
   updateProjectRoles,
+  updateGuideRoles,
 };
 export default projectApi;

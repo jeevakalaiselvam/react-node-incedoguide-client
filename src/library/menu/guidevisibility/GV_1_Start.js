@@ -10,10 +10,12 @@ import {
   Input,
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { GV_SETUP_START } from '../../menuconstants/guideVisibility';
+import {
+  GV_SETUP_CONFIRM,
+  GV_SETUP_START,
+} from '../../menuconstants/guideVisibility';
 import { MAIN_ADMIN, MENU_TOGGLE_OPEN } from '../../menuconstants/mainMenu';
 import {
-  actionConfigureGuidesNewCurrentAction,
   actionGuideVisibilityCurrentAction,
   actionMenuOption,
   actionMenuToggle,
@@ -24,7 +26,7 @@ export default function GV_1_Start() {
   const menu = useSelector((state) => state.menu);
   const project = useSelector((state) => state.project);
   const { guides } = project;
-  const { guideVisibility } = menu;
+  const { guideVisibilityState } = menu;
   const { projectDetails } = user;
   const { projectRoles } = projectDetails;
   const [guideSelected, setGuideSelected] = useState(0);
@@ -49,10 +51,6 @@ export default function GV_1_Start() {
     e.persist();
     setGuideSelected(+e.target.value);
   };
-
-  useEffect(() => {
-    console.log('ROLES CHANGED', rolesInGuides);
-  });
 
   const checkboxChangedHandler = (roleKey) => {
     console.log(roleKey);
@@ -80,7 +78,7 @@ export default function GV_1_Start() {
   return (
     <Modal
       toggle={function noRefCheck() {}}
-      isOpen={guideVisibility.currentAction === GV_SETUP_START}
+      isOpen={guideVisibilityState.currentAction === GV_SETUP_START}
     >
       <ModalHeader
         toggle={() => {
@@ -138,7 +136,19 @@ export default function GV_1_Start() {
         </FormGroup>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={function noRefCheck() {}}>
+        <Button
+          color="primary"
+          onClick={() => {
+            dispatch(
+              actionGuideVisibilityCurrentAction({
+                action: GV_SETUP_CONFIRM,
+                data: {
+                  rolesInGuides,
+                },
+              })
+            );
+          }}
+        >
           UPDATE
         </Button>{' '}
         <Button

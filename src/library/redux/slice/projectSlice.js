@@ -14,6 +14,19 @@ export const apiMarkGuideComplete = createAsyncThunk(
   }
 );
 
+export const apiUpdateGuideRoles = createAsyncThunk(
+  'project/updateGuideRoles',
+  async ({ projectId, identifier, environment, rolesInGuides }, thunkAPI) => {
+    const response = projectApi.updateGuideRoles({
+      projectId,
+      identifier,
+      environment,
+      rolesInGuides,
+    });
+    return response;
+  }
+);
+
 export const apiGetAllGuides = createAsyncThunk(
   'project/getAllGuides',
   async ({ projectId, identifier, environment }, thunkAPI) => {
@@ -137,7 +150,7 @@ export const projectSlicer = createSlice({
     },
     [apiMarkGuideComplete.fulfilled]: (state, { payload }) => {
       state.completedGuides = payload.completedGuides;
-      state.loading = true;
+      state.loading = false;
     },
     [apiMarkGuideComplete.rejected]: (state) => {
       state.loading = true;
@@ -147,7 +160,7 @@ export const projectSlicer = createSlice({
     },
     [apiUpdateGuide.fulfilled]: (state, { payload }) => {
       state.guides = payload.guides;
-      state.loading = true;
+      state.loading = false;
     },
     [apiUpdateGuide.rejected]: (state) => {
       state.loading = true;
@@ -157,9 +170,26 @@ export const projectSlicer = createSlice({
     },
     [apiDeleteGuides.fulfilled]: (state, { payload }) => {
       state.guides = payload.guides;
-      state.loading = true;
+      state.loading = false;
     },
     [apiDeleteGuides.rejected]: (state) => {
+      state.loading = true;
+    },
+    [apiUpdateGuideRoles.pending]: (state) => {
+      state.loading = true;
+    },
+    [apiUpdateGuideRoles.fulfilled]: (state, { payload }) => {
+      const rolesInGuides = payload.rolesInGuides;
+      let newGuides = [...state.guides];
+      newGuides = state.guides.map((guide) => {
+        let newGuide = { ...guide };
+        newGuide.roleVisibility = rolesInGuides[guide.guideId];
+        return newGuide;
+      });
+      state.guides = newGuides;
+      state.loading = false;
+    },
+    [apiUpdateGuideRoles.rejected]: (state) => {
       state.loading = true;
     },
   },

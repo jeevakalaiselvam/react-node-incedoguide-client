@@ -99,8 +99,9 @@ const initialState = {
     oldRoles: {},
     newRoles: {},
   },
-  guideVisibility: {
+  guideVisibilityState: {
     currentAction: '',
+    rolesInGuides: {},
   },
 };
 export const menuSlice = createSlice({
@@ -136,7 +137,7 @@ export const menuSlice = createSlice({
           break;
         case MENU_OPTION_SETUP_VISIBILITY:
           state.menuOption = MENU_OPTION_SETUP_VISIBILITY;
-          state.guideVisibility.currentAction = GV_SETUP_START;
+          state.guideVisibilityState.currentAction = GV_SETUP_START;
           break;
         default:
           break;
@@ -393,13 +394,14 @@ export const menuSlice = createSlice({
     ) => {
       switch (action) {
         case '':
-          state.guideVisibility.currentAction = '';
+          state.guideVisibilityState.currentAction = '';
           break;
         case GV_SETUP_START:
-          state.guideVisibility.currentAction = GV_SETUP_START;
+          state.guideVisibilityState.currentAction = GV_SETUP_START;
           break;
         case GV_SETUP_CONFIRM:
-          state.guideVisibility.currentAction = GV_SETUP_CONFIRM;
+          state.guideVisibilityState.currentAction = GV_SETUP_CONFIRM;
+          state.guideVisibilityState.rolesInGuides = data.rolesInGuides;
           break;
         default:
           break;

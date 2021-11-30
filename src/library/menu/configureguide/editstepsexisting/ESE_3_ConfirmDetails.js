@@ -1,44 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Button,
-  Input,
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText,
-  ListGroup,
-  ListGroupItem,
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
   Table,
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  actionConfigureGuidesAddStepsCurrentAction,
   actionConfigureGuidesEditStepsCurrentAction,
   actionMenuOption,
   actionMenuToggle,
 } from '../../../redux/slice/menuSlice';
 import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
-import { FormGroup, Label } from 'reactstrap';
-import {
-  CG_EDIT_STEP_EDIT_CONFIRM,
-  CG_EDIT_STEP_EDIT_DETAILS,
-  CG_EDIT_STEP_START,
-} from '../../../menuconstants/CG_EditStep';
+import { CG_EDIT_STEP_EDIT_CONFIRM } from '../../../menuconstants/CG_EditStep';
 import { apiUpdateGuide } from '../../../redux/slice/projectSlice';
 
 export default function ESE_3_ConfirmDetails() {
-  const user = useSelector((state) => state.user);
   const menu = useSelector((state) => state.menu);
   const project = useSelector((state) => state.project);
-  const { guides, currentEnvironment } = project;
+  const { currentEnvironment } = project;
   const { configureGuidesEditStepsState } = menu;
   const { oldGuide, newGuide } = configureGuidesEditStepsState;
   const dispatch = useDispatch();

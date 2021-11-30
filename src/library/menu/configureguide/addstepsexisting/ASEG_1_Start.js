@@ -36,7 +36,8 @@ export default function ASEG_1_Start() {
   };
 
   useEffect(() => {
-    selectedGuide = guides.find((guide) => guide.guideId == selectedGuideId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    selectedGuide = guides.find((guide) => +guide.guideId === +selectedGuideId);
   }, [selectedGuideId]);
 
   return (

@@ -12,7 +12,7 @@ import {
 } from './redux/slice/projectSlice';
 import ReactJoyride, { EVENTS, STATUS } from 'react-joyride';
 import { apiFetchUserDetails } from './redux/slice/userSlice';
-import IdleTimer, { useIdleTimer } from 'react-idle-timer';
+import { useIdleTimer } from 'react-idle-timer';
 import UserIdleModal from './uicomponents/UserIdleModal';
 
 export default function Core({
@@ -102,7 +102,7 @@ export default function Core({
         })
       );
 
-      const { status, index, type } = data;
+      const { status, type } = data;
       if (type === EVENTS.TOOLTIP_CLOSE) {
         dispatch(actionSetJoyrideStart(false));
       } else if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
@@ -147,7 +147,7 @@ export default function Core({
   //When user does something
   const handleOnAction = (event) => {};
 
-  const { getRemainingTime, getLastActiveTime } = useIdleTimer({
+  useIdleTimer({
     timeout: 1000 * 10 * 60, //10 Mins of Inactivity
     onIdle: handleOnIdle,
     onActive: handleOnActive,

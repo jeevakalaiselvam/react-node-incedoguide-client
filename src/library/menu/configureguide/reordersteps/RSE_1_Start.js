@@ -19,10 +19,6 @@ import {
   CG_REORDER_STEP_START,
 } from '../../../menuconstants/CG_ReorderStep';
 import { FormGroup, Label } from 'reactstrap';
-import {
-  CG_EDIT_STEP_EDIT_DETAILS,
-  CG_EDIT_STEP_START,
-} from '../../../menuconstants/CG_EditStep';
 
 export default function ESE_1_Start() {
   const menu = useSelector((state) => state.menu);
@@ -38,6 +34,7 @@ export default function ESE_1_Start() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     selectedGuide = guides.find((guide) => guide.guideId === selectedGuideId);
   }, [selectedGuideId]);
 

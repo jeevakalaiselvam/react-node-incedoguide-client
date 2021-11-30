@@ -27,13 +27,10 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function RSE_2_StepOrder() {
   const menu = useSelector((state) => state.menu);
-  const project = useSelector((state) => state.project);
-  const { guides } = project;
   const { configureGuidesReorderStepsState } = menu;
-  const { selectedGuideId, oldGuide } = configureGuidesReorderStepsState;
-  const { steps, guideId, projectId, identifier, title } = oldGuide;
+  const { oldGuide } = configureGuidesReorderStepsState;
+  const { steps } = oldGuide;
   const dispatch = useDispatch();
-  const [selectedStep, setSelectedStep] = useState(0);
   const [newGuide, setNewGuide] = useState(oldGuide);
 
   useEffect(() => {

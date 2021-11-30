@@ -55,7 +55,7 @@ export default function ANG_2_DomSelect() {
       });
 
       document.addEventListener('keydown', function (e) {
-        if (e.keyCode == 27) {
+        if (e.keyCode === 27) {
           const allElements = document.querySelectorAll('*');
 
           allElements.forEach((element) => {

@@ -1,29 +1,10 @@
 import React from 'react';
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Alert,
-  Badge,
-  Tooltip,
-} from 'reactstrap';
+import { Badge } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { CG_NEW_DOM_SELECT, CG_NEW_START } from '../../../menuconstants/CG_New';
-import {
-  actionConfigureGuidesNewCurrentAction,
-  actionMenuOption,
-  actionMenuToggle,
-} from '../../../redux/slice/menuSlice';
-import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
+import { actionConfigureGuidesNewCurrentAction } from '../../../redux/slice/menuSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSpellCheck,
-  faQuestion,
-  faChair,
-  faCheck,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function ANG_1_Start() {
   const menu = useSelector((state) => state.menu);

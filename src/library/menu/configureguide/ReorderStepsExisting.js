@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import RSE_1_Start from './reordersteps/RSE_1_Start';
 import {
@@ -13,7 +14,6 @@ import RSE_3_ConfirmDetails from './reordersteps/RSE_3_ConfirmDetails';
 export default function ReorderStepsExisting() {
   const menu = useSelector((state) => state.menu);
   const { configureGuidesReorderStepsState } = menu;
-  const dispatch = useDispatch();
 
   return (
     <>

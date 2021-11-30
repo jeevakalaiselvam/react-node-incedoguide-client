@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   CG_EDIT_STEP_EDIT_CONFIRM,
   CG_EDIT_STEP_EDIT_DETAILS,
@@ -12,7 +13,6 @@ import ESE_3_ConfirmDetails from './editstepsexisting/ESE_3_ConfirmDetails';
 export default function EditStepsExisting() {
   const menu = useSelector((state) => state.menu);
   const { configureGuidesEditStepsState } = menu;
-  const dispatch = useDispatch();
 
   return (
     <>

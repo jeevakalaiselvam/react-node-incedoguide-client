@@ -1,15 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Button,
-  ButtonGroup,
-  Navbar,
-  NavbarToggler,
-  Collapse,
-  Nav,
-  NavLink,
-  NavItem,
-} from 'reactstrap';
 import '../../index.css';
 
 export default function Footer({ index }) {

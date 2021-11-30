@@ -1,20 +1,7 @@
 import React from 'react';
 import CommonTabs from './ui-general/CommonTabs';
 import Footer from './ui-general/Footer';
-import {
-  Row,
-  Col,
-  FormGroup,
-  Label,
-  Input,
-  Card,
-  Button,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Table,
-  CardText,
-} from 'reactstrap';
+import { Row, Col, Card, Button, CardBody, CardTitle, Table } from 'reactstrap';
 
 export default function LeaveDashboard() {
   return (

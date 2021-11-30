@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   ModalHeader,
@@ -18,16 +18,12 @@ import { FormGroup, Label } from 'reactstrap';
 import {
   CG_EDIT_STEP_EDIT_CONFIRM,
   CG_EDIT_STEP_EDIT_DETAILS,
-  CG_EDIT_STEP_START,
 } from '../../../menuconstants/CG_EditStep';
 
 export default function ESE_2_EditDetails() {
   const menu = useSelector((state) => state.menu);
-  const project = useSelector((state) => state.project);
-  const { guides } = project;
   const { configureGuidesEditStepsState } = menu;
-  const { selectedGuideId, oldGuide } = configureGuidesEditStepsState;
-  const { steps, guideId, projectId, identifier, title } = oldGuide;
+  const { oldGuide } = configureGuidesEditStepsState;
   const dispatch = useDispatch();
   const [selectedStep, setSelectedStep] = useState(0);
   const [newGuide, setNewGuide] = useState(oldGuide);

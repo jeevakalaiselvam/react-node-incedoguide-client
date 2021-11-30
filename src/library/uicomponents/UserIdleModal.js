@@ -1,13 +1,11 @@
 import React from 'react';
 import { Button, Modal, ModalFooter, ModalHeader } from 'reactstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actionSetUserIdle } from '../redux/slice/projectSlice';
 import { actionMenuToggle } from '../redux/slice/menuSlice';
 import { MENU_TOGGLE_CLOSE, MENU_TOGGLE_OPEN } from '../menuconstants/mainMenu';
 
 export default function UserIdleModal() {
-  const project = useSelector((state) => state.project);
-  const { userIdle } = project;
   const dispatch = useDispatch();
 
   return (

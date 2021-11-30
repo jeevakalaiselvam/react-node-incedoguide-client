@@ -1,41 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Button,
-  Input,
   CardBody,
   CardTitle,
   CardSubtitle,
-  CardText,
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   actionConfigureGuidesDeleteGuidesCurrentAction,
-  actionConfigureGuidesReorderStepsCurrentAction,
   actionMenuOption,
   actionMenuToggle,
 } from '../../../redux/slice/menuSlice';
 import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
-import {
-  CG_REORDER_STEP_CHANGE_ORDER,
-  CG_REORDER_STEP_START,
-} from '../../../menuconstants/CG_ReorderStep';
-import { FormGroup, Label, Card } from 'reactstrap';
-import {
-  CG_EDIT_STEP_EDIT_DETAILS,
-  CG_EDIT_STEP_START,
-} from '../../../menuconstants/CG_EditStep';
-import {
-  CG_DELETE_GUIDE_CONFIRM,
-  CG_DELETE_GUIDE_START,
-} from '../../../menuconstants/CG_DeleteGuide';
-import {
-  apiUpdateGuide,
-  apiDeleteGuides,
-} from '../../../redux/slice/projectSlice';
+
+import { Card } from 'reactstrap';
+import { CG_DELETE_GUIDE_CONFIRM } from '../../../menuconstants/CG_DeleteGuide';
+import { apiDeleteGuides } from '../../../redux/slice/projectSlice';
 
 export default function DG_2_Confirm() {
   const user = useSelector((state) => state.user);

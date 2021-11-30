@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Badge, Card, Dropdown, FormGroup, Input, Label } from 'reactstrap';
+import { Badge, Dropdown } from 'reactstrap';
 import { DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {
   ADMIN_USER,
@@ -10,8 +10,6 @@ import {
   MENU_TOGGLE_OPEN,
   NORMAL_USER,
 } from './menuconstants/mainMenu';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import ConfigureGuides from './menu/ConfigureGuides';
 import { actionMenuOption, actionMenuToggle } from './redux/slice/menuSlice';
 import GuideItem from './uicomponents/GuideItem';
@@ -26,7 +24,6 @@ export default function Menu() {
   const { projectDetails, userDetails } = user;
   const { projectRoles, userId } = projectDetails;
   const { currentUserId, currentUserRoles } = userDetails;
-  const { roleType } = projectDetails;
   const { guides } = project;
 
   const isUserAdmin =
@@ -52,7 +49,7 @@ export default function Menu() {
         </DropdownToggle>
         <DropdownMenu style={{ minWidth: '225px' }}>
           {isUserAdmin ? (
-            currentUserId == userId ? (
+            +currentUserId === +userId ? (
               <Badge color="danger">PROJECT ADMIN</Badge>
             ) : (
               <Badge color="warning">ADMIN</Badge>
@@ -98,7 +95,7 @@ export default function Menu() {
           {isUserAdmin &&
             guides.map((guide) => {
               return (
-                <DropdownItem key={guide.guideId} key={guide.guideId}>
+                <DropdownItem key={guide.guideId}>
                   <GuideItem title={guide.title} guideId={guide.guideId} />
                 </DropdownItem>
               );
@@ -113,10 +110,12 @@ export default function Menu() {
                 )
               ) {
                 return (
-                  <DropdownItem key={guide.guideId} key={guide.guideId}>
+                  <DropdownItem key={guide.guideId}>
                     <GuideItem title={guide.title} guideId={guide.guideId} />
                   </DropdownItem>
                 );
+              } else {
+                return null;
               }
             })}
         </DropdownMenu>

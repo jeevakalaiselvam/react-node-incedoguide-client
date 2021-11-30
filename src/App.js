@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CONFIG from './config';
 import {
@@ -11,18 +11,6 @@ import {
   NavLink,
   Container,
   Row,
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  FormGroup,
-  Label,
-  Input,
-  CardText,
-  TabContent,
-  Button,
-  Col,
-  TabPane,
 } from 'reactstrap';
 import incedoImage from './assets/incedo.webp';
 //import IncedoGuide from 'incedoguide';
@@ -31,18 +19,10 @@ import LeaveDashboard from './components/LeaveDashboard';
 import ApplyLeave from './components/ApplyLeave';
 import RaiseCompOff from './components/RaiseCompOff';
 import LeaveHistory from './components/LeaveHistory';
-import { useState } from 'react';
 import './index.css';
-import CommonTabs from './components/ui-general/CommonTabs';
 import HumanResources from './components/pages/HumanResources';
 
 function App() {
-  const [currentTab, setCurrentTab] = useState('1');
-
-  const tabChangeHandler = (index) => {
-    setCurrentTab((old) => index);
-  };
-
   return (
     <div className="App">
       <Router>

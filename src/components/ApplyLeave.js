@@ -10,10 +10,6 @@ import {
   Card,
   Button,
   CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText,
-  Table,
 } from 'reactstrap';
 
 export default function ApplyLeave() {

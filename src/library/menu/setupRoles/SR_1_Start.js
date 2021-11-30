@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { MENU_OPTION_SETUP_ROLES } from '../../menuconstants/menuOptions';
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Button,
-  Dropdown,
   Label,
   Input,
   FormGroup,
@@ -17,8 +15,6 @@ import {
   Badge,
 } from 'reactstrap';
 import {
-  actionConfigureGuidesDeleteGuidesCurrentAction,
-  actionConfigureGuidesOption,
   actionMenuOption,
   actionMenuToggle,
   actionSetupRolesCurrentAction,
@@ -32,7 +28,6 @@ export default function SR_1_Start() {
   const { projectDetails } = user;
   const { projectRoles, userId } = projectDetails;
   const dispatch = useDispatch();
-  const { menuOption } = menu;
   const { setupRolesState } = menu;
   const [roleSelected, setRoleSelected] = useState(MAIN_ADMIN);
   const [newUser, setNewUser] = useState('');
@@ -123,7 +118,7 @@ export default function SR_1_Start() {
                     >
                       <span style={{ flex: '1' }}>{user}</span>
                       {/* Show Delete only if user is not the main initial admin */}
-                      {user != userId && (
+                      {user + '' !== userId + '' && (
                         <Badge
                           color="danger"
                           className="incedo-delete-badge"
@@ -132,7 +127,7 @@ export default function SR_1_Start() {
                           DELETE
                         </Badge>
                       )}
-                      {user == userId && (
+                      {user + '' === userId + '' && (
                         <Badge color="success" onClick={() => {}}>
                           PROJECT ADMIN
                         </Badge>

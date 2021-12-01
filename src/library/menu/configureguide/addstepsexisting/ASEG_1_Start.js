@@ -26,7 +26,9 @@ export default function ASEG_1_Start() {
   const { guides } = project;
   const { configureGuidesAddStepsState } = menu;
   const dispatch = useDispatch();
-  const [selectedGuideId, setSelectedGuideId] = useState(guides[0].guideId);
+  const [selectedGuideId, setSelectedGuideId] = useState(
+    (guides.length !== 0 && guides[0].guideId) || 0
+  );
   let selectedGuide = {};
 
   const guideIdSelectHandler = (e) => {
@@ -60,7 +62,7 @@ export default function ASEG_1_Start() {
           Add Steps to Existing
         </ModalHeader>
         <ModalBody>
-          {guides.length && (
+          {guides.length !== 0 && (
             <FormGroup>
               <Label for="exampleSelect">Select the Guide</Label>
               <Input
@@ -80,25 +82,29 @@ export default function ASEG_1_Start() {
               </Input>
             </FormGroup>
           )}
-          {!guides.length && <h1>No Guide Present</h1>}
+          {guides.length === 0 && <h3>No Guides Present</h3>}
         </ModalBody>
         <ModalFooter>
-          <Button
-            color="primary"
-            onClick={() => {
-              dispatch(
-                actionConfigureGuidesAddStepsCurrentAction({
-                  action: CG_ADD_STEP_INSERTION_POINT,
-                  data: {
-                    guideId: selectedGuideId,
-                    oldGuide: selectedGuide,
-                  },
-                })
-              );
-            }}
-          >
-            CONFIRM
-          </Button>{' '}
+          {guides.length !== 0 && (
+            <>
+              <Button
+                color="primary"
+                onClick={() => {
+                  dispatch(
+                    actionConfigureGuidesAddStepsCurrentAction({
+                      action: CG_ADD_STEP_INSERTION_POINT,
+                      data: {
+                        guideId: selectedGuideId,
+                        oldGuide: selectedGuide,
+                      },
+                    })
+                  );
+                }}
+              >
+                CONFIRM
+              </Button>{' '}
+            </>
+          )}
           <Button
             onClick={() => {
               dispatch(actionMenuOption(''));

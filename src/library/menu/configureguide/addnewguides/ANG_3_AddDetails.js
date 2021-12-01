@@ -47,7 +47,6 @@ export default function ANG_3_AddDetails() {
 
   //Validation States
   const [validity, setValidity] = useState({});
-
   //Checking Validation on each data change
   useEffect(() => {
     guideTitle !== ''

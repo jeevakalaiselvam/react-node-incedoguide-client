@@ -73,6 +73,8 @@ export default function ANG_4_Confirm() {
                   action: CG_NEW_START,
                   data: {
                     title: configureGuidesNewState.guideTitle,
+                    roleVisibilityList:
+                      configureGuidesNewState.roleVisibilityList,
                   },
                 })
               );

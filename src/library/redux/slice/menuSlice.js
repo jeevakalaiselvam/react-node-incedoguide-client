@@ -63,7 +63,7 @@ const initialState = {
     guideTitle: '',
     currentDomTarget: '',
     oldGuide: {},
-    roleVisibilityList: [],
+    roleVisibilityList: {},
   },
   configureGuidesAddStepsState: {
     currentAction: '',
@@ -191,6 +191,8 @@ export const menuSlice = createSlice({
         case CG_NEW_START:
           state.configureGuidesNewState.currentAction = CG_NEW_START;
           state.configureGuidesNewState.guideTitle = data.title;
+          state.configureGuidesNewState.roleVisibilityList =
+            data.roleVisibilityList || [];
           break;
         case CG_NEW_DOM_SELECT:
           state.configureGuidesNewState.currentAction = CG_NEW_DOM_SELECT;
@@ -203,6 +205,7 @@ export const menuSlice = createSlice({
           state.configureGuidesNewState.currentAction = CG_NEW_CONFIRM_STEP;
           state.configureGuidesNewState.roleVisibilityList =
             data.roleVisibilityList;
+
           state.configureGuidesNewState.guideTitle = data.guideTitle;
           state.configureGuidesNewState.steps = [
             ...state.configureGuidesNewState.steps,

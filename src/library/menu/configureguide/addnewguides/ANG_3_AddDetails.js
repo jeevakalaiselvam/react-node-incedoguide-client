@@ -28,11 +28,15 @@ export default function ANG_3_AddDetails() {
   const { projectDetails } = user;
   const { projectRoles } = projectDetails;
   const { configureGuidesNewState } = menu;
+  const { roleVisibilityList: roleVisibilityListInState } =
+    configureGuidesNewState;
   const dispatch = useDispatch();
   const [guideTitle, setGuideTitle] = useState('');
   const [stepName, setStepName] = useState('');
   const [stepContent, setStepContent] = useState('');
-  const [roleVisibilityList, setRoleVisibilityList] = useState([]);
+  const [roleVisibilityList, setRoleVisibilityList] = useState(
+    roleVisibilityListInState
+  );
   const allRolesWithoutAdminRole = Object.keys(projectRoles).filter(
     (role) => role !== MAIN_ADMIN
   );

@@ -33,7 +33,9 @@ export default function ANG_3_AddDetails() {
   const { roleVisibilityList: roleVisibilityListInState } =
     configureGuidesNewState;
   const dispatch = useDispatch();
-  const [guideTitle, setGuideTitle] = useState('');
+  const [guideTitle, setGuideTitle] = useState(
+    configureGuidesNewState.guideTitle || ''
+  );
   const [stepName, setStepName] = useState('');
   const [stepContent, setStepContent] = useState('');
   const [roleVisibilityList, setRoleVisibilityList] = useState(
@@ -182,11 +184,6 @@ export default function ANG_3_AddDetails() {
           <Button
             color="primary"
             onClick={() => {
-              console.log(
-                Object.keys(validity).every(
-                  (key) => validity[key].isValid === true
-                )
-              );
               if (
                 Object.keys(validity).every(
                   (key) => validity[key].isValid === true

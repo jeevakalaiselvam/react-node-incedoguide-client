@@ -94,9 +94,11 @@
   left: 1rem;
   font-size: 1.5rem;
   color: red;
+  padding: 1rem;
+  z-index: 100000;
   cursor: pointer;
   transition: 0.5s all;
-  animation: blinking 1s linear infinite;
+  animation: blinking 2s linear infinite;
 }
 
 .incedoguide-badge {

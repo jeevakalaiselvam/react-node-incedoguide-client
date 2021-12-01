@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Modal,
   ModalHeader,
@@ -6,6 +6,7 @@ import {
   ModalFooter,
   Button,
   Input,
+  FormFeedback,
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -32,6 +33,43 @@ export default function ESE_2_EditDetails() {
     e.persist();
     setSelectedStep((old) => e.target.value);
   };
+
+  //Check Validation
+  const [validity, setValidity] = useState({});
+  const [titleValidity, setTitleValidity] = useState({
+    isValid: true,
+    invalidMessage: 'Guide Title cannot be empty',
+  });
+
+  //When title changed, Check its validation and set it in state
+  useEffect(() => {
+    setTitleValidity((old) => ({
+      isValid: newGuide.title !== '',
+      invalidMessage: 'Guide Title cannot be empty',
+    }));
+  }, [newGuide]);
+
+  //When Guides are being updated, Check validation for all steps and update in state
+  useEffect(() => {
+    let newValidityState = {};
+    newGuide.steps.forEach((step, index) => {
+      newValidityState = {
+        ...newValidityState,
+        [index]: {
+          stepTitle: {
+            isValid: step.title !== '',
+            invalidMessage: 'Step Title cannot be empty',
+          },
+          stepContent: {
+            isValid: step.content !== '',
+            invalidMessage: 'Step Content cannot be empty',
+          },
+        },
+      };
+    });
+
+    setValidity((old) => newValidityState);
+  }, [newGuide]);
 
   return (
     <>
@@ -63,12 +101,17 @@ export default function ESE_2_EditDetails() {
                   name="stepName"
                   placeholder=""
                   type="text"
+                  valid={titleValidity?.isValid || false}
+                  invalid={!titleValidity?.isValid || false}
                   onChange={(e) => {
                     e.persist();
                     setNewGuide((old) => ({ ...old, title: e.target.value }));
                   }}
                   value={newGuide.title}
                 />
+                <FormFeedback invalid="true">
+                  {titleValidity?.invalidMessage}
+                </FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="exampleSelect">Select the Step</Label>
@@ -96,6 +139,10 @@ export default function ESE_2_EditDetails() {
                     name="stepName"
                     placeholder=""
                     type="text"
+                    valid={validity[selectedStep]?.stepTitle?.isValid || false}
+                    invalid={
+                      !validity[selectedStep]?.stepTitle?.isValid || false
+                    }
                     onChange={(e) => {
                       e.persist();
                       const oldSteps = [...newGuide.steps];
@@ -110,14 +157,23 @@ export default function ESE_2_EditDetails() {
                     }}
                     value={newGuide.steps[selectedStep].title}
                   />
+                  <FormFeedback invalid="true">
+                    {validity[selectedStep]?.stepTitle?.invalidMessage}
+                  </FormFeedback>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="stepDescription">Step Description</Label>
+                  <Label for="stepDescription">Step Content</Label>
                   <Input
                     id="stepDescription"
                     name="stepDescription"
                     placeholder=""
-                    type="text"
+                    type="textarea"
+                    valid={
+                      validity[selectedStep]?.stepContent?.isValid || false
+                    }
+                    invalid={
+                      !validity[selectedStep]?.stepContent?.isValid || false
+                    }
                     onChange={(e) => {
                       e.persist();
                       const oldSteps = [...newGuide.steps];
@@ -132,23 +188,34 @@ export default function ESE_2_EditDetails() {
                     }}
                     value={newGuide.steps[selectedStep].content}
                   />
+                  <FormFeedback invalid="true">
+                    {validity[selectedStep]?.stepContent?.invalidMessage}
+                  </FormFeedback>
                 </FormGroup>
                 <Button
                   color="danger"
                   outline
+                  disabled={newGuide.steps.length === 1}
                   onClick={() => {
-                    const newSteps = newGuide.steps.filter(
-                      (_, index) => +selectedStep !== index
-                    );
-                    setNewGuide((old) => ({
-                      ...old,
-                      steps: newSteps,
-                    }));
-                    setSelectedStep((old) => 0);
+                    //If there are more than one step, If not do not allow to delete the last step
+                    if (newGuide.steps.length > 1) {
+                      const newSteps = newGuide.steps.filter(
+                        (_, index) => +selectedStep !== index
+                      );
+                      setNewGuide((old) => ({
+                        ...old,
+                        steps: newSteps,
+                      }));
+                      setSelectedStep((old) => 0);
+                    } else {
+                    }
                   }}
                 >
-                  Delete Step {+selectedStep + 1}
+                  {newGuide.steps.length === 1 && 'THIS STEP CANNOT BE DELETED'}
+                  {newGuide.steps.length > 1 &&
+                    `Delete Step ${+selectedStep + 1}`}
                 </Button>
+                {/* Show error when user tried to delete the last step in Guide */}
               </FormGroup>
             </>
           )}
@@ -158,15 +225,23 @@ export default function ESE_2_EditDetails() {
           <Button
             color="primary"
             onClick={() => {
-              console.log(newGuide);
-              dispatch(
-                actionConfigureGuidesEditStepsCurrentAction({
-                  action: CG_EDIT_STEP_EDIT_CONFIRM,
-                  data: {
-                    newGuide: newGuide,
-                  },
-                })
-              );
+              //Only move to next step if stepTitle and stepContent for all steps are not empty
+              if (
+                Object.values(validity).every(
+                  (step) => step.stepTitle.isValid && step.stepContent.isValid
+                ) &&
+                titleValidity.isValid
+              ) {
+                dispatch(
+                  actionConfigureGuidesEditStepsCurrentAction({
+                    action: CG_EDIT_STEP_EDIT_CONFIRM,
+                    data: {
+                      newGuide: newGuide,
+                    },
+                  })
+                );
+              } else {
+              }
             }}
           >
             CONFIRM

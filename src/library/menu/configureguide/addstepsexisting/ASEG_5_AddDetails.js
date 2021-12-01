@@ -9,6 +9,7 @@ import {
   Input,
   Label,
   FormGroup,
+  FormFeedback,
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -22,6 +23,7 @@ import {
   CG_ADD_STEP_ADD_DETAILS,
   CG_ADD_STEP_CONFIRM_STEPS,
 } from '../../../menuconstants/CG_AddStep';
+import { useEffect } from 'react';
 
 export default function ASEG_5_AddDetails() {
   const menu = useSelector((state) => state.menu);
@@ -30,6 +32,30 @@ export default function ASEG_5_AddDetails() {
   const dispatch = useDispatch();
   const [stepName, setStepName] = useState('');
   const [stepContent, setStepContent] = useState('');
+
+  //Checking Validation
+  const [validity, setValidity] = useState({});
+  //Checking Validation on each data change
+  useEffect(() => {
+    stepName !== ''
+      ? setValidity((old) => ({ ...old, stepName: { isValid: true } }))
+      : setValidity((old) => ({
+          ...old,
+          stepName: {
+            isValid: false,
+            invalidMessage: 'Guide Step Title cannot be empty',
+          },
+        }));
+    stepContent !== ''
+      ? setValidity((old) => ({ ...old, stepContent: { isValid: true } }))
+      : setValidity((old) => ({
+          ...old,
+          stepContent: {
+            isValid: false,
+            invalidMessage: 'Guide Step Content cannot be empty',
+          },
+        }));
+  }, [stepName, stepContent]);
 
   return (
     <>
@@ -68,24 +94,34 @@ export default function ASEG_5_AddDetails() {
                 name="stepName"
                 placeholder=""
                 type="text"
+                valid={validity['stepName']?.isValid || false}
+                invalid={!validity['stepName']?.isValid || false}
                 onChange={(e) => {
                   setStepName(e.currentTarget.value);
                 }}
                 value={stepName}
               />
+              <FormFeedback invalid="true">
+                {validity['stepName']?.invalidMessage}
+              </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label for="stepDescription">Step Description</Label>
+              <Label for="stepDescription">Step Content</Label>
               <Input
                 id="stepDescription"
                 name="stepDescription"
                 placeholder=""
-                type="text"
+                type="textarea"
+                valid={validity['stepContent']?.isValid || false}
+                invalid={!validity['stepContent']?.isValid || false}
                 onChange={(e) => {
                   setStepContent(e.currentTarget.value);
                 }}
                 value={stepContent}
               />
+              <FormFeedback invalid="true">
+                {validity['stepContent']?.invalidMessage}
+              </FormFeedback>
             </FormGroup>
           </Form>
         </ModalBody>
@@ -93,15 +129,22 @@ export default function ASEG_5_AddDetails() {
           <Button
             color="primary"
             onClick={() => {
-              dispatch(
-                actionConfigureGuidesAddStepsCurrentAction({
-                  action: CG_ADD_STEP_CONFIRM_STEPS,
-                  data: {
-                    stepName,
-                    stepContent,
-                  },
-                })
-              );
+              if (
+                Object.keys(validity).every(
+                  (key) => validity[key].isValid === true
+                )
+              ) {
+                dispatch(
+                  actionConfigureGuidesAddStepsCurrentAction({
+                    action: CG_ADD_STEP_CONFIRM_STEPS,
+                    data: {
+                      stepName,
+                      stepContent,
+                    },
+                  })
+                );
+              } else {
+              }
             }}
           >
             CONFIRM

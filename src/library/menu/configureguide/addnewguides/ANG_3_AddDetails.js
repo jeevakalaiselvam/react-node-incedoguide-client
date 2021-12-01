@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Modal,
   ModalHeader,
@@ -9,6 +9,8 @@ import {
   Input,
   Label,
   FormGroup,
+  Alert,
+  FormFeedback,
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -41,6 +43,40 @@ export default function ANG_3_AddDetails() {
     (role) => role !== MAIN_ADMIN
   );
 
+  //Validation States
+  const [validity, setValidity] = useState({});
+
+  //Checking Validation on each data change
+  useEffect(() => {
+    guideTitle !== ''
+      ? setValidity((old) => ({ ...old, guideTitle: { isValid: true } }))
+      : setValidity((old) => ({
+          ...old,
+          guideTitle: {
+            isValid: false,
+            invalidMessage: 'Guide Title cannot be empty',
+          },
+        }));
+    stepName !== ''
+      ? setValidity((old) => ({ ...old, stepName: { isValid: true } }))
+      : setValidity((old) => ({
+          ...old,
+          stepName: {
+            isValid: false,
+            invalidMessage: 'Guide Step Title cannot be empty',
+          },
+        }));
+    stepContent !== ''
+      ? setValidity((old) => ({ ...old, stepContent: { isValid: true } }))
+      : setValidity((old) => ({
+          ...old,
+          stepContent: {
+            isValid: false,
+            invalidMessage: 'Guide Step Content cannot be empty',
+          },
+        }));
+  }, [guideTitle, stepName, stepContent]);
+
   const roleVisibilityCheckboxChanged = (role) => {
     setRoleVisibilityList((old) => ({ ...old, [role]: !old[role] }));
   };
@@ -71,11 +107,16 @@ export default function ANG_3_AddDetails() {
                     name="guideTitle"
                     placeholder=""
                     type="text"
+                    valid={validity['guideTitle']?.isValid || false}
+                    invalid={!validity['guideTitle']?.isValid || false}
                     onChange={(e) => {
                       setGuideTitle(e.currentTarget.value);
                     }}
                     value={guideTitle}
                   />
+                  <FormFeedback invalid="true">
+                    {validity['guideTitle']?.invalidMessage}
+                  </FormFeedback>
                 </FormGroup>
                 {/* Render all Role Check boxes */}
 
@@ -106,11 +147,16 @@ export default function ANG_3_AddDetails() {
                 name="stepName"
                 placeholder=""
                 type="text"
+                valid={validity['stepName']?.isValid || false}
+                invalid={!validity['stepName']?.isValid || false}
                 onChange={(e) => {
                   setStepName(e.currentTarget.value);
                 }}
                 value={stepName}
               />
+              <FormFeedback invalid="true">
+                {validity['stepName']?.invalidMessage}
+              </FormFeedback>
             </FormGroup>
             <FormGroup>
               <Label for="stepDescription">Step Description</Label>
@@ -119,11 +165,16 @@ export default function ANG_3_AddDetails() {
                 name="stepDescription"
                 placeholder=""
                 type="text"
+                valid={validity['stepContent']?.isValid || false}
+                invalid={!validity['stepContent']?.isValid || false}
                 onChange={(e) => {
                   setStepContent(e.currentTarget.value);
                 }}
                 value={stepContent}
               />
+              <FormFeedback invalid="true">
+                {validity['stepContent']?.invalidMessage}
+              </FormFeedback>
             </FormGroup>
           </Form>
         </ModalBody>
@@ -131,21 +182,33 @@ export default function ANG_3_AddDetails() {
           <Button
             color="primary"
             onClick={() => {
-              const titleAlreadyPresentInState =
-                configureGuidesNewState.guideTitle !== '';
-              dispatch(
-                actionConfigureGuidesNewCurrentAction({
-                  action: CG_NEW_CONFIRM_STEP,
-                  data: {
-                    roleVisibilityList,
-                    stepName,
-                    stepContent,
-                    guideTitle: titleAlreadyPresentInState
-                      ? configureGuidesNewState.guideTitle
-                      : guideTitle,
-                  },
-                })
+              console.log(
+                Object.keys(validity).every(
+                  (key) => validity[key].isValid === true
+                )
               );
+              if (
+                Object.keys(validity).every(
+                  (key) => validity[key].isValid === true
+                )
+              ) {
+                const titleAlreadyPresentInState =
+                  configureGuidesNewState.guideTitle !== '';
+                dispatch(
+                  actionConfigureGuidesNewCurrentAction({
+                    action: CG_NEW_CONFIRM_STEP,
+                    data: {
+                      roleVisibilityList,
+                      stepName,
+                      stepContent,
+                      guideTitle: titleAlreadyPresentInState
+                        ? configureGuidesNewState.guideTitle
+                        : guideTitle,
+                    },
+                  })
+                );
+              } else {
+              }
             }}
           >
             CONFIRM

@@ -13,8 +13,8 @@ import {
   Row,
 } from 'reactstrap';
 import incedoImage from './assets/incedo.webp';
-import IncedoGuide from 'incedoguide';
-//import IncedoGuide from './library/IncedoGuide';
+//import IncedoGuide from 'incedoguide';
+import IncedoGuide from './library/IncedoGuide';
 import LeaveDashboard from './components/LeaveDashboard';
 import ApplyLeave from './components/ApplyLeave';
 import RaiseCompOff from './components/RaiseCompOff';

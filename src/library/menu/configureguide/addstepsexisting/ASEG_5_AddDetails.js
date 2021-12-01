@@ -106,12 +106,12 @@ export default function ASEG_5_AddDetails() {
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label for="stepDescription">Step Description</Label>
+              <Label for="stepDescription">Step Content</Label>
               <Input
                 id="stepDescription"
                 name="stepDescription"
                 placeholder=""
-                type="text"
+                type="textarea"
                 valid={validity['stepContent']?.isValid || false}
                 invalid={!validity['stepContent']?.isValid || false}
                 onChange={(e) => {

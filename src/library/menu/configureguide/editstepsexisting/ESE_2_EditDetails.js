@@ -36,7 +36,20 @@ export default function ESE_2_EditDetails() {
 
   //Check Validation
   const [validity, setValidity] = useState({});
+  const [titleValidity, setTitleValidity] = useState({
+    isValid: true,
+    invalidMessage: 'Guide Title cannot be empty',
+  });
 
+  //When title changed, Check its validation and set it in state
+  useEffect(() => {
+    setTitleValidity((old) => ({
+      isValid: newGuide.title !== '',
+      invalidMessage: 'Guide Title cannot be empty',
+    }));
+  }, [newGuide]);
+
+  //When Guides are being updated, Check validation for all steps and update in state
   useEffect(() => {
     let newValidityState = {};
     newGuide.steps.forEach((step, index) => {
@@ -88,12 +101,17 @@ export default function ESE_2_EditDetails() {
                   name="stepName"
                   placeholder=""
                   type="text"
+                  valid={titleValidity?.isValid || false}
+                  invalid={!titleValidity?.isValid || false}
                   onChange={(e) => {
                     e.persist();
                     setNewGuide((old) => ({ ...old, title: e.target.value }));
                   }}
                   value={newGuide.title}
                 />
+                <FormFeedback invalid="true">
+                  {titleValidity?.invalidMessage}
+                </FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="exampleSelect">Select the Step</Label>
@@ -144,12 +162,12 @@ export default function ESE_2_EditDetails() {
                   </FormFeedback>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="stepDescription">Step Description</Label>
+                  <Label for="stepDescription">Step Content</Label>
                   <Input
                     id="stepDescription"
                     name="stepDescription"
                     placeholder=""
-                    type="text"
+                    type="textarea"
                     valid={
                       validity[selectedStep]?.stepContent?.isValid || false
                     }
@@ -193,7 +211,7 @@ export default function ESE_2_EditDetails() {
                     }
                   }}
                 >
-                  {newGuide.steps.length === 1 && 'ONLY STEP'}
+                  {newGuide.steps.length === 1 && 'THIS STEP CANNOT BE DELETED'}
                   {newGuide.steps.length > 1 &&
                     `Delete Step ${+selectedStep + 1}`}
                 </Button>
@@ -211,7 +229,8 @@ export default function ESE_2_EditDetails() {
               if (
                 Object.values(validity).every(
                   (step) => step.stepTitle.isValid && step.stepContent.isValid
-                )
+                ) &&
+                titleValidity.isValid
               ) {
                 dispatch(
                   actionConfigureGuidesEditStepsCurrentAction({

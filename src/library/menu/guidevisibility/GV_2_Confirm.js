@@ -15,7 +15,7 @@ export default function GV_2_Confirm() {
   const menu = useSelector((state) => state.menu);
   const project = useSelector((state) => state.project);
   const { identifier, currentEnvironment } = project;
-  const { userDetails, projectDetails } = user;
+  const { projectDetails } = user;
   const { projectId } = projectDetails;
   const { guideVisibilityState } = menu;
   const { rolesInGuides } = guideVisibilityState;

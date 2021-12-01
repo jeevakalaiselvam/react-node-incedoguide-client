@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   ModalHeader,
@@ -10,20 +10,11 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import {
   actionConfigureGuidesDeleteGuidesCurrentAction,
-  actionConfigureGuidesReorderStepsCurrentAction,
   actionMenuOption,
   actionMenuToggle,
 } from '../../../redux/slice/menuSlice';
 import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
-import {
-  CG_REORDER_STEP_CHANGE_ORDER,
-  CG_REORDER_STEP_START,
-} from '../../../menuconstants/CG_ReorderStep';
 import { FormGroup, Label } from 'reactstrap';
-import {
-  CG_EDIT_STEP_EDIT_DETAILS,
-  CG_EDIT_STEP_START,
-} from '../../../menuconstants/CG_EditStep';
 import {
   CG_DELETE_GUIDE_CONFIRM,
   CG_DELETE_GUIDE_START,

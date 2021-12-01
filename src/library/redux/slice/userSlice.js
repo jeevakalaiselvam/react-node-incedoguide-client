@@ -1,15 +1,44 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import projectApi from '../../api/projectApi';
 import userApi from '../../api/userAPI';
+
+export const apiUpdateProjectRoles = createAsyncThunk(
+  'project/updateProjectRoles',
+  async ({ projectId, userId, environment, projectRoles }, thunkAPI) => {
+    const response = projectApi.updateProjectRoles({
+      projectId,
+      userId,
+      projectRoles,
+      environment,
+    });
+    return response;
+  }
+);
 
 export const apiFetchUserDetails = createAsyncThunk(
   'users/fetchUserDetails',
-  async ({ userId, emailId, fullName, projectName, environment }, thunkAPI) => {
+  async (
+    {
+      userId,
+      emailId,
+      fullName,
+      projectName,
+      environment,
+      projectRoles,
+      currentUserId,
+      currentUserRoles,
+    },
+    thunkAPI
+  ) => {
     const response = userApi.fetchUserDetails({
       userId,
       emailId,
       fullName,
       projectName,
       environment,
+      projectRoles,
+      currentUserId,
+      currentUserRoles,
     });
     return response;
   }
@@ -38,12 +67,26 @@ export const userSlice = createSlice({
       state.loading = true;
     },
     [apiFetchUserDetails.fulfilled]: (state, { payload }) => {
-      state.userDetails = payload.user;
+      state.userDetails = {
+        ...payload.user,
+        currentUserId: payload.currentUserId,
+        currentUserRoles: payload.currentUserRoles,
+      };
       state.projectDetails = payload.project;
       state.loading = false;
     },
     [apiFetchUserDetails.rejected]: (state) => {
       state.loading = false;
+    },
+    [apiUpdateProjectRoles.pending]: (state) => {
+      state.loading = true;
+    },
+    [apiUpdateProjectRoles.fulfilled]: (state, { payload }) => {
+      state.projectDetails.projectRoles = payload.project.projectRoles;
+      state.loading = true;
+    },
+    [apiUpdateProjectRoles.rejected]: (state) => {
+      state.loading = true;
     },
   },
 });

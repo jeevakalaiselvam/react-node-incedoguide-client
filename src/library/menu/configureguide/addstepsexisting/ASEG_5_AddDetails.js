@@ -12,10 +12,6 @@ import {
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  CG_NEW_ADD_DETAILS,
-  CG_NEW_CONFIRM_STEP,
-} from '../../../menuconstants/CG_New';
-import {
   actionConfigureGuidesAddStepsCurrentAction,
   actionConfigureGuidesNewCurrentAction,
   actionMenuOption,

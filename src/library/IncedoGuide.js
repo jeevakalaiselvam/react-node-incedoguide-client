@@ -9,6 +9,9 @@ export default function IncedoGuide({
   projectName,
   fullName,
   emailId,
+  projectRoles,
+  currentUserId,
+  currentUserRoles,
 }) {
   return (
     <Provider store={store}>
@@ -18,6 +21,9 @@ export default function IncedoGuide({
         projectName={projectName}
         fullName={fullName}
         emailId={emailId}
+        projectRoles={projectRoles}
+        currentUserId={currentUserId}
+        currentUserRoles={currentUserRoles}
       />
     </Provider>
   );

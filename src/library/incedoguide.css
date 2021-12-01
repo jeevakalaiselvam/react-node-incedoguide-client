@@ -66,11 +66,12 @@
   cursor: pointer;
   z-index: 100000;
   transition: 0.1s all;
-  /* animation: blinking 2s linear infinite; */
+  animation: blinking 1s linear infinite;
 }
 
 .incedo-guide-domselect-help-visible:hover {
   transform: scale(1.05);
+  animation: none;
 }
 
 .incedo-guide-domselect-help-invisible {
@@ -92,6 +93,7 @@
   bottom: 0px;
   left: 0px;
   font-size: 1.5rem;
+  color: red;
   cursor: pointer;
   transition: 0.5s all;
   animation: blinking 1s linear infinite;
@@ -99,6 +101,13 @@
 
 .incedoguide-badge {
   background-color: orange !important;
+}
+
+.incedo-delete-badge {
+  cursor: pointer;
+}
+.incedo-delete-badge:hover {
+  background-color: red !important;
 }
 
 .incedo-table-header {

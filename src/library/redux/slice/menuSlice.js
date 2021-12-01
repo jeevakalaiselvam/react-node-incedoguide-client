@@ -16,7 +16,11 @@ import {
   MENU_TOGGLE_CLOSE,
   MENU_TOGGLE_OPEN,
 } from '../../menuconstants/mainMenu';
-import { MENU_OPTION_CONFIGURE_GUIDES } from '../../menuconstants/menuOptions';
+import {
+  MENU_OPTION_CONFIGURE_GUIDES,
+  MENU_OPTION_SETUP_VISIBILITY,
+  MENU_OPTION_SETUP_ROLES,
+} from '../../menuconstants/menuOptions';
 import {
   CG_EDIT_STEP_EDIT_CONFIRM,
   CG_EDIT_STEP_EDIT_DETAILS,
@@ -35,6 +39,14 @@ import {
   CG_DELETE_GUIDE_START,
 } from '../../menuconstants/CG_DeleteGuide';
 import {
+  SR_SETUP_CONFIRM,
+  SR_SETUP_START,
+} from '../../menuconstants/setupRoles';
+import {
+  GV_SETUP_CONFIRM,
+  GV_SETUP_START,
+} from '../../menuconstants/guideVisibility';
+import {
   CG_REORDER_STEP_CHANGE_ORDER,
   CG_REORDER_STEP_CONFIRM,
   CG_REORDER_STEP_START,
@@ -44,12 +56,14 @@ const initialState = {
   menuToggle: '',
   menuOption: '',
   configureGuidesOption: '',
+  setupRolesOption: '',
   configureGuidesNewState: {
     currentAction: '',
     steps: [],
     guideTitle: '',
     currentDomTarget: '',
     oldGuide: {},
+    roleVisibilityList: {},
   },
   configureGuidesAddStepsState: {
     currentAction: '',
@@ -59,6 +73,7 @@ const initialState = {
     selectedGuideId: '',
     insertionIndex: '',
     oldGuide: {},
+    roleVisibilityList: {},
   },
   configureGuidesEditStepsState: {
     currentAction: '',
@@ -78,6 +93,15 @@ const initialState = {
     currentAction: '',
     oldGuides: [],
     guideIdsToDelete: [],
+  },
+  setupRolesState: {
+    currentAction: '',
+    oldRoles: {},
+    newRoles: {},
+  },
+  guideVisibilityState: {
+    currentAction: '',
+    rolesInGuides: {},
   },
 };
 export const menuSlice = createSlice({
@@ -106,6 +130,14 @@ export const menuSlice = createSlice({
           break;
         case MENU_OPTION_CONFIGURE_GUIDES:
           state.menuOption = MENU_OPTION_CONFIGURE_GUIDES;
+          break;
+        case MENU_OPTION_SETUP_ROLES:
+          state.menuOption = MENU_OPTION_SETUP_ROLES;
+          state.setupRolesState.currentAction = SR_SETUP_START;
+          break;
+        case MENU_OPTION_SETUP_VISIBILITY:
+          state.menuOption = MENU_OPTION_SETUP_VISIBILITY;
+          state.guideVisibilityState.currentAction = GV_SETUP_START;
           break;
         default:
           break;
@@ -159,6 +191,8 @@ export const menuSlice = createSlice({
         case CG_NEW_START:
           state.configureGuidesNewState.currentAction = CG_NEW_START;
           state.configureGuidesNewState.guideTitle = data.title;
+          state.configureGuidesNewState.roleVisibilityList =
+            data.roleVisibilityList || [];
           break;
         case CG_NEW_DOM_SELECT:
           state.configureGuidesNewState.currentAction = CG_NEW_DOM_SELECT;
@@ -169,6 +203,9 @@ export const menuSlice = createSlice({
           break;
         case CG_NEW_CONFIRM_STEP:
           state.configureGuidesNewState.currentAction = CG_NEW_CONFIRM_STEP;
+          state.configureGuidesNewState.roleVisibilityList =
+            data.roleVisibilityList;
+
           state.configureGuidesNewState.guideTitle = data.guideTitle;
           state.configureGuidesNewState.steps = [
             ...state.configureGuidesNewState.steps,
@@ -333,6 +370,46 @@ export const menuSlice = createSlice({
           break;
       }
     },
+    //Setup Roles State
+    actionSetupRolesCurrentAction: (state, { payload: { action, data } }) => {
+      switch (action) {
+        case '':
+          state.setupRolesState.currentAction = '';
+          state.setupRolesState.oldRoles = {};
+          state.setupRolesState.newRoles = {};
+          break;
+        case SR_SETUP_START:
+          state.setupRolesState.currentAction = SR_SETUP_START;
+          break;
+        case SR_SETUP_CONFIRM:
+          state.setupRolesState.currentAction = SR_SETUP_CONFIRM;
+          state.setupRolesState.oldRoles = data.oldRoles;
+          state.setupRolesState.newRoles = data.newRoles;
+          break;
+        default:
+          break;
+      }
+    },
+    //Setup Guide Visibility
+    actionGuideVisibilityCurrentAction: (
+      state,
+      { payload: { action, data } }
+    ) => {
+      switch (action) {
+        case '':
+          state.guideVisibilityState.currentAction = '';
+          break;
+        case GV_SETUP_START:
+          state.guideVisibilityState.currentAction = GV_SETUP_START;
+          break;
+        case GV_SETUP_CONFIRM:
+          state.guideVisibilityState.currentAction = GV_SETUP_CONFIRM;
+          state.guideVisibilityState.rolesInGuides = data.rolesInGuides;
+          break;
+        default:
+          break;
+      }
+    },
   },
   extraReducers: {},
 });
@@ -347,6 +424,8 @@ export const {
   actionConfigureGuidesEditStepsCurrentAction,
   actionConfigureGuidesReorderStepsCurrentAction,
   actionConfigureGuidesDeleteGuidesCurrentAction,
+  actionSetupRolesCurrentAction,
+  actionGuideVisibilityCurrentAction,
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

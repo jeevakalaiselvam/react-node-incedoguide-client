@@ -6,30 +6,23 @@ import {
   actionMenuOption,
   actionMenuToggle,
 } from '../../../redux/slice/menuSlice';
-import {
-  apiAddNewGuide,
-  apiUpdateGuide,
-} from '../../../redux/slice/projectSlice';
+import { apiUpdateGuide } from '../../../redux/slice/projectSlice';
 import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
 import {
   CG_ADD_STEP_CONFIRM_STEPS,
   CG_ADD_STEP_PROMPT,
-  CG_ADD_STEP_START,
 } from '../../../menuconstants/CG_AddStep';
 
 export default function ASEG_6_Confirm() {
   const menu = useSelector((state) => state.menu);
-  const user = useSelector((state) => state.user);
   const project = useSelector((state) => state.project);
 
-  const { currentEnvironment, identifier, guides } = project;
+  const { currentEnvironment, guides } = project;
   const { configureGuidesAddStepsState } = menu;
   const { insertionIndex, guideTitle, steps, selectedGuideId } =
     configureGuidesAddStepsState;
-  const { projectDetails } = user;
 
   const dispatch = useDispatch();
-  const { projectId } = projectDetails;
 
   return (
     <>
@@ -58,7 +51,7 @@ export default function ASEG_6_Confirm() {
             onClick={() => {
               //Add new steps to existing Guide Steps in state
               const guideToUpdate = guides.find(
-                (guide) => guide.guideId == selectedGuideId
+                (guide) => +guide.guideId === +selectedGuideId
               );
               const oldSteps = [...guideToUpdate.steps];
               const newGuideStepsAltered = oldSteps

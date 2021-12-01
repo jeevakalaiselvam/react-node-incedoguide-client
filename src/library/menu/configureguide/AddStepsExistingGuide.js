@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   CG_ADD_STEP_ADD_DETAILS,
   CG_ADD_STEP_CONFIRM_STEPS,
@@ -18,7 +19,6 @@ import ASEG_6_Confirm from './addstepsexisting/ASEG_6_Confirm';
 export default function AddStepsExistingGuide() {
   const menu = useSelector((state) => state.menu);
   const { configureGuidesAddStepsState } = menu;
-  const dispatch = useDispatch();
 
   return (
     <>

@@ -1,15 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import unique from 'unique-selector';
-import {
-  actionConfigureGuidesAddStepsCurrentAction,
-  actionConfigureGuidesNewCurrentAction,
-} from '../../../redux/slice/menuSlice';
-import { CG_NEW_ADD_DETAILS } from '../../../menuconstants/CG_New';
-import {
-  CG_ADD_STEP_ADD_DETAILS,
-  CG_ADD_STEP_DOM_SELECT,
-} from '../../../menuconstants/CG_AddStep';
+import { actionConfigureGuidesAddStepsCurrentAction } from '../../../redux/slice/menuSlice';
+import { CG_ADD_STEP_ADD_DETAILS } from '../../../menuconstants/CG_AddStep';
 
 export default function ASEG_4_DomSelect() {
   const dispatch = useDispatch();

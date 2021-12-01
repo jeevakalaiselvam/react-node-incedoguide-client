@@ -3,13 +3,10 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
-  Input,
   Card,
   CardBody,
   CardTitle,
-  CardSubtitle,
   CardText,
   Badge,
 } from 'reactstrap';
@@ -21,12 +18,9 @@ import {
 } from '../../../redux/slice/menuSlice';
 import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
 import {
-  CG_ADD_STEP_DOM_SELECT,
   CG_ADD_STEP_INSERTION_POINT,
   CG_ADD_STEP_PROMPT,
 } from '../../../menuconstants/CG_AddStep';
-import { FormGroup, Label } from 'reactstrap';
-import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 
 export default function EEG_2_InsertionPoint() {
   const menu = useSelector((state) => state.menu);
@@ -34,7 +28,9 @@ export default function EEG_2_InsertionPoint() {
   const { guides } = project;
   const { configureGuidesAddStepsState } = menu;
   const { selectedGuideId } = configureGuidesAddStepsState;
-  const currentGuide = guides.find((guide) => guide.guideId == selectedGuideId);
+  const currentGuide = guides.find(
+    (guide) => +guide.guideId === +selectedGuideId
+  );
   const dispatch = useDispatch();
 
   const insertionSelectedHandler = (insertionIndex) => {

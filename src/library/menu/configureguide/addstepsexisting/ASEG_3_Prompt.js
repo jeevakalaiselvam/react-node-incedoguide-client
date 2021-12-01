@@ -1,22 +1,8 @@
 import React from 'react';
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Badge,
-} from 'reactstrap';
+import { Badge } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { CG_NEW_DOM_SELECT, CG_NEW_START } from '../../../menuconstants/CG_New';
+import { actionConfigureGuidesAddStepsCurrentAction } from '../../../redux/slice/menuSlice';
 import {
-  actionConfigureGuidesAddStepsCurrentAction,
-  actionMenuOption,
-  actionMenuToggle,
-} from '../../../redux/slice/menuSlice';
-import { MENU_TOGGLE_OPEN } from '../../../menuconstants/mainMenu';
-import {
-  CG_ADD_STEP_CONFIRM_STEPS,
   CG_ADD_STEP_DOM_SELECT,
   CG_ADD_STEP_PROMPT,
 } from '../../../menuconstants/CG_AddStep';

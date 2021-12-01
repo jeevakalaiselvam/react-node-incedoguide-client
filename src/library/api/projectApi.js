@@ -28,6 +28,7 @@ export const addNewGuide = async ({
   steps = {},
   title,
   environment = 'LOCAL',
+  roleVisibilityList,
 }) => {
   const url = `${getBaseUrl(environment)}guide/add`;
   const response = await axios.post(url, {
@@ -35,6 +36,7 @@ export const addNewGuide = async ({
     identifier,
     steps,
     title,
+    roleVisibilityList,
   });
   if (response.status === 200 || response.status === 201) {
     return response.data;
@@ -101,11 +103,53 @@ export const deleteGuides = async ({
   }
 };
 
+//Update Project Roles
+export const updateProjectRoles = async ({
+  userId,
+  projectId = '',
+  projectRoles,
+  environment = 'LOCAL',
+}) => {
+  const url = `${getBaseUrl(environment)}project/updateRoles`;
+  const response = await axios.post(url, {
+    userId,
+    projectId,
+    projectRoles,
+  });
+  if (response.status === 200 || response.status === 201) {
+    return response.data;
+  } else {
+    throw new Error('Updating Project Roles Failed');
+  }
+};
+
+//Update Guide Roles
+export const updateGuideRoles = async ({
+  projectId,
+  identifier,
+  rolesInGuides,
+  environment = 'LOCAL',
+}) => {
+  const url = `${getBaseUrl(environment)}guide/updateRoles`;
+  const response = await axios.post(url, {
+    projectId,
+    identifier,
+    rolesInGuides,
+  });
+  if (response.status === 200 || response.status === 201) {
+    return response.data;
+  } else {
+    throw new Error('Updating Guide Roles Failed');
+  }
+};
+
 const projectApi = {
   addNewGuide,
   getAllGuides,
   markGuideComplete,
   updateGuide,
   deleteGuides,
+  updateProjectRoles,
+  updateGuideRoles,
 };
 export default projectApi;

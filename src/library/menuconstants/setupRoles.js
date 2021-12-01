@@ -1,0 +1,3 @@
+export const SR_SETUP_START = 'SR_SETUP_START';
+export const SR_SETUP_CONFIRM = 'SR_SETUP_CONFIRM';
+export const SR_SETUP_UPDATE = 'SR_SETUP_UPDATE';

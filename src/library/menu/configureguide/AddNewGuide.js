@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ANG_2_DomSelect from './addnewguides/ANG_2_DomSelect';

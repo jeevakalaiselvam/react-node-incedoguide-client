@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, ButtonGroup } from 'reactstrap';
+import { ButtonGroup } from 'reactstrap';
 import '../../index.css';
 
 export default function CommonTabs({ index }) {

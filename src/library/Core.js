@@ -81,12 +81,12 @@ export default function Core({
         const oldGuideStepIndex = JSON.parse(oldGuideStarted).currentStepIndex;
         const oldGuideId = JSON.parse(oldGuideStarted).selectedGuideId;
 
-        //Wait until document loads before triggering step left from last guide start
+        //Wait until document loads before triggering steps left from last guide start in different page
         setTimeout(() => {
           dispatch(actionSetJoyrideStart(true));
           dispatch(actionSetJoyrideSteps(oldGuideId));
           setCurrentStepIndex((old) => +oldGuideStepIndex + 0.5); //BUG - Temporary fix for double render in useEffect
-        }, 500);
+        }, 1000);
       }
     }
   }, [projectId, identifier, currentEnvironment, dispatch]);

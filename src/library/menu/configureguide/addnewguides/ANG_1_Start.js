@@ -28,6 +28,7 @@ export default function ANG_1_Start() {
             dispatch(
               actionConfigureGuidesNewCurrentAction({
                 action: CG_NEW_DOM_SELECT,
+                data: {},
               })
             );
           }}

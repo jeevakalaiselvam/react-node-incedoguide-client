@@ -82,7 +82,7 @@ export default function DG_1_Start() {
                 </FormGroup>
               );
             })}
-          {guides.length === 0 && <h1>No Guides Present</h1>}
+          {guides.length === 0 && <h3>No Guides Present</h3>}
         </ModalBody>
         <ModalFooter>
           <Button

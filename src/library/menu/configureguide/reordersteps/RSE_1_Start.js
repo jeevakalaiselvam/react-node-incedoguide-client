@@ -26,7 +26,9 @@ export default function ESE_1_Start() {
   const { guides } = project;
   const { configureGuidesReorderStepsState } = menu;
   const dispatch = useDispatch();
-  const [selectedGuideId, setSelectedGuideId] = useState(guides[0].guideId);
+  const [selectedGuideId, setSelectedGuideId] = useState(
+    (guides.length !== 0 && guides[0].guideId) || 0
+  );
   let selectedGuide = {};
 
   const guideIdSelectHandler = (e) => {
@@ -59,7 +61,7 @@ export default function ESE_1_Start() {
           Edit Steps of Existing
         </ModalHeader>
         <ModalBody>
-          {guides.length && (
+          {guides.length !== 0 && (
             <FormGroup>
               <Label for="exampleSelect">Select the Tour</Label>
               <Input
@@ -79,7 +81,7 @@ export default function ESE_1_Start() {
               </Input>
             </FormGroup>
           )}
-          {!guides.length && <h1>No Tours Present</h1>}
+          {guides.length === 0 && <h3>No Tours Present</h3>}
         </ModalBody>
         <ModalFooter>
           <Button

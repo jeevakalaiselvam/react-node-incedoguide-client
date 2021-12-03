@@ -90,50 +90,55 @@ export default function GV_1_Start() {
         Setup Guide Visibility
       </ModalHeader>
       <ModalBody>
-        <FormGroup>
-          <Label for="guideSelected">Select Guide</Label>
-          <Input
-            id="guideSelected"
-            name="guideSelected"
-            type="select"
-            value={guideSelected}
-            onChange={guideSelectionHandler}
-          >
-            {guides &&
-              guides.length !== 0 &&
-              guides.map((guide) => {
-                return (
-                  <option key={guide.guideId} value={guide.guideId}>
-                    {guide.title}
-                  </option>
-                );
-              })}
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="guideSelected">Choose Roles</Label>
-          <br />
-          {projectRoles &&
-            rolesInGuides &&
-            Object.keys(projectRoles).length !== 0 &&
-            Object.keys(rolesInGuides).length !== 0 &&
-            Object.keys(projectRoles).map((roleKey) => {
-              return (
-                <FormGroup check inline key={roleKey}>
-                  {roleKey !== MAIN_ADMIN && (
-                    <React.Fragment>
-                      <Input
-                        type="checkbox"
-                        onChange={() => checkboxChangedHandler(roleKey)}
-                        checked={rolesInGuides[guideSelected].includes(roleKey)}
-                      />
-                      <Label check>{roleKey}</Label>
-                    </React.Fragment>
-                  )}
-                </FormGroup>
-              );
-            })}
-        </FormGroup>
+        {guides && guides.length !== 0 && (
+          <React.Fragment>
+            <FormGroup>
+              <Label for="guideSelected">Select Guide</Label>
+              <Input
+                id="guideSelected"
+                name="guideSelected"
+                type="select"
+                value={guideSelected}
+                onChange={guideSelectionHandler}
+              >
+                {guides.map((guide) => {
+                  return (
+                    <option key={guide.guideId} value={guide.guideId}>
+                      {guide.title}
+                    </option>
+                  );
+                })}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label for="guideSelected">Choose Roles</Label>
+              <br />
+              {projectRoles &&
+                rolesInGuides &&
+                Object.keys(projectRoles).length !== 0 &&
+                Object.keys(rolesInGuides).length !== 0 &&
+                Object.keys(projectRoles).map((roleKey) => {
+                  return (
+                    <FormGroup check inline key={roleKey}>
+                      {roleKey !== MAIN_ADMIN && (
+                        <React.Fragment>
+                          <Input
+                            type="checkbox"
+                            onChange={() => checkboxChangedHandler(roleKey)}
+                            checked={rolesInGuides[guideSelected].includes(
+                              roleKey
+                            )}
+                          />
+                          <Label check>{roleKey}</Label>
+                        </React.Fragment>
+                      )}
+                    </FormGroup>
+                  );
+                })}
+            </FormGroup>
+          </React.Fragment>
+        )}
+        {guides && guides.length === 0 && <h3>No Tours present</h3>}
       </ModalBody>
       <ModalFooter>
         <Button

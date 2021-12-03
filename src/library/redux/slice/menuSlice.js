@@ -187,12 +187,10 @@ export const menuSlice = createSlice({
           state.configureGuidesNewState.guideTitle = '';
           state.configureGuidesNewState.currentDomTarget = '';
           state.configureGuidesNewState.steps = [];
+          state.configureGuidesNewState.roleVisibilityList = [];
           break;
         case CG_NEW_START:
           state.configureGuidesNewState.currentAction = CG_NEW_START;
-          state.configureGuidesNewState.guideTitle = data.title;
-          state.configureGuidesNewState.roleVisibilityList =
-            data.roleVisibilityList || [];
           break;
         case CG_NEW_DOM_SELECT:
           state.configureGuidesNewState.currentAction = CG_NEW_DOM_SELECT;

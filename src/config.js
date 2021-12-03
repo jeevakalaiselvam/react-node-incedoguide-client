@@ -6,21 +6,7 @@ const CONFIG = {
   emailId: 'jeeva.kalaiselvam@incedoinc.com',
   projectRoles: ['ROLE_TYPE1', 'ROLE_TYPE2'],
   currentUserId: '606276',
-  currentUserRoles: ['ROLE_TYPE1'],
+  currentUserRoles: ['ROLE_TYPE2', 'ROLE_TYPE1'],
 };
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <IncedoGuide
-                  userId={CONFIG.userId}
-                  environment={CONFIG.environment}
-                  projectName={CONFIG.projectName}
-                  fullName={CONFIG.fullName}
-                  emailId={CONFIG.emailId}
-                  projectRoles={CONFIG.projectRoles}
-                  currentUserId={CONFIG.currentUserId}
-                  currentUserRoles={CONFIG.currentUserRoles}
-                /> */
-}
 
 export default CONFIG;

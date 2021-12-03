@@ -15,6 +15,7 @@ import { actionMenuOption, actionMenuToggle } from './redux/slice/menuSlice';
 import GuideItem from './uicomponents/GuideItem';
 import SetupRoles from './menu/SetupRoles';
 import GuideVisibility from './menu/GuideVisibility';
+import { checkIfGuideShouldBeVisibleToUser } from './helper/util';
 
 export default function Menu() {
   const user = useSelector((state) => state.user);
@@ -104,7 +105,12 @@ export default function Menu() {
           {/* If User is not ADMIN, Render Guides only based on current Role */}
           {!isUserAdmin &&
             guides.map((guide) => {
-              if ((guide.roleVisibility, currentUserRoles)) {
+              if (
+                checkIfGuideShouldBeVisibleToUser(
+                  guide.roleVisibility,
+                  currentUserRoles
+                )
+              ) {
                 return (
                   <DropdownItem key={guide.guideId}>
                     <GuideItem title={guide.title} guideId={guide.guideId} />

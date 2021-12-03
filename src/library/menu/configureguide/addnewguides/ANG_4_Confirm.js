@@ -1,5 +1,17 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardText,
+  Badge,
+} from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   CG_NEW_CONFIRM_STEP,
@@ -20,6 +32,7 @@ export default function ANG_4_Confirm() {
 
   const { currentEnvironment, identifier } = project;
   const { configureGuidesNewState } = menu;
+  const { steps } = configureGuidesNewState;
   const { projectDetails } = user;
 
   const dispatch = useDispatch();
@@ -40,7 +53,23 @@ export default function ANG_4_Confirm() {
         >
           Confirm the steps
         </ModalHeader>
-        <ModalBody>Confirm the steps</ModalBody>
+        <ModalBody>
+          {steps.length === 0 && <h3>No Steps present </h3>}
+          {steps.length !== 0 &&
+            steps.map(({ title, content }, index) => (
+              <Card key={index} className="mt-2">
+                <CardBody>
+                  <Badge color="primary">Step {index + 1}</Badge>
+                  <CardTitle tag="h5" className="mt-2">
+                    {title}
+                  </CardTitle>
+                  <CardSubtitle className="mb-2 text-muted" tag="h6">
+                    {content}
+                  </CardSubtitle>
+                </CardBody>
+              </Card>
+            ))}
+        </ModalBody>
         <ModalFooter>
           <Button
             color="primary"

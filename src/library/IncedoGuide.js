@@ -5,7 +5,7 @@ import Core from './Core';
 import './incedoguide.css';
 export default function IncedoGuide({
   userId,
-  environment = 'LOCAL',
+  environment,
   projectName,
   fullName,
   emailId,

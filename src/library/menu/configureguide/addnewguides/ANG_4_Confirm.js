@@ -9,7 +9,6 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  CardText,
   Badge,
 } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';

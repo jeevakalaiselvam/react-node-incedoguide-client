@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import unique from 'unique-selector';
 import { actionConfigureGuidesNewCurrentAction } from '../../../redux/slice/menuSlice';
 import {
@@ -8,10 +8,7 @@ import {
 } from '../../../menuconstants/CG_New';
 
 export default function ANG_2_DomSelect() {
-  const menu = useSelector((state) => state.menu);
   const dispatch = useDispatch();
-  const { configureGuidesNewState } = menu;
-  const { guideTitle, roleVisibilityList } = configureGuidesNewState;
 
   const mouseEnterHandler = (e) => {
     e.preventDefault();

@@ -1,6 +1,6 @@
 import React from 'react';
 import CommonTabs from './ui-general/CommonTabs';
-import { Row, Col, Card, Button, CardBody, CardTitle, Table } from 'reactstrap';
+import { Row, Col, Card, CardBody, CardTitle, Table } from 'reactstrap';
 
 export default function LeaveHistory() {
   return (

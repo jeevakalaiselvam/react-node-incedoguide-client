@@ -6,7 +6,7 @@ export const markGuideComplete = async ({
   projectId,
   selectedGuideId,
   userId,
-  environment = 'LOCAL',
+  environment,
 }) => {
   const url = `${getBaseUrl(environment)}audit/mark`;
   const response = await axios.post(url, {
@@ -27,7 +27,7 @@ export const addNewGuide = async ({
   identifier = '/',
   steps = {},
   title,
-  environment = 'LOCAL',
+  environment,
   roleVisibilityList,
 }) => {
   const url = `${getBaseUrl(environment)}guide/add`;
@@ -46,11 +46,7 @@ export const addNewGuide = async ({
 };
 
 //Find All Guides for a ProjectId and Identifier
-export const getAllGuides = async ({
-  projectId,
-  identifier,
-  environment = 'LOCAL',
-}) => {
+export const getAllGuides = async ({ projectId, identifier, environment }) => {
   const url = `${getBaseUrl(environment)}guide/all`;
   const response = await axios.post(url, {
     projectId,
@@ -68,7 +64,7 @@ export const updateGuide = async ({
   guide,
   projectId = '',
   identifier = '/',
-  environment = 'LOCAL',
+  environment,
 }) => {
   const url = `${getBaseUrl(environment)}guide/update`;
   const response = await axios.post(url, {
@@ -88,7 +84,7 @@ export const deleteGuides = async ({
   guideIdsToDelete,
   projectId = '',
   identifier = '/',
-  environment = 'LOCAL',
+  environment,
 }) => {
   const url = `${getBaseUrl(environment)}guide/delete`;
   const response = await axios.post(url, {
@@ -108,7 +104,7 @@ export const updateProjectRoles = async ({
   userId,
   projectId = '',
   projectRoles,
-  environment = 'LOCAL',
+  environment,
 }) => {
   const url = `${getBaseUrl(environment)}project/updateRoles`;
   const response = await axios.post(url, {
@@ -128,7 +124,7 @@ export const updateGuideRoles = async ({
   projectId,
   identifier,
   rolesInGuides,
-  environment = 'LOCAL',
+  environment,
 }) => {
   const url = `${getBaseUrl(environment)}guide/updateRoles`;
   const response = await axios.post(url, {

@@ -17,7 +17,7 @@ import UserIdleModal from './uicomponents/UserIdleModal';
 
 export default function Core({
   userId,
-  environment = 'LOCAL',
+  environment,
   projectName,
   fullName,
   emailId,
